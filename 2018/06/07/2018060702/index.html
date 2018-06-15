@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>微服务架构~BFF和网关是如何演化出来的 | 波波微课</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="介绍BFF(Backend for Frontend)和网关Gateway是微服务架构中的两个重要概念，这两个概念相对比较新，有些开发人员甚至是架构师都不甚理解。 本文用假想的公司案例+图示的方式，解释BFF和网关是什么，它们是怎么演化出来的。希望对架构师设计和落地微服务架构有所启发。">
+<meta name="keywords" content="微服务,BFF,网关">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微服务架构~BFF和网关是如何演化出来的">
+<meta property="og:url" content="http://yoursite.com/2018/06/07/2018060702/index.html">
+<meta property="og:site_name" content="波波微课">
+<meta property="og:description" content="介绍BFF(Backend for Frontend)和网关Gateway是微服务架构中的两个重要概念，这两个概念相对比较新，有些开发人员甚至是架构师都不甚理解。 本文用假想的公司案例+图示的方式，解释BFF和网关是什么，它们是怎么演化出来的。希望对架构师设计和落地微服务架构有所启发。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/2018060702/zuul.png">
+<meta property="og:updated_time" content="2018-06-15T07:17:49.913Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微服务架构~BFF和网关是如何演化出来的">
+<meta name="twitter:description" content="介绍BFF(Backend for Frontend)和网关Gateway是微服务架构中的两个重要概念，这两个概念相对比较新，有些开发人员甚至是架构师都不甚理解。 本文用假想的公司案例+图示的方式，解释BFF和网关是什么，它们是怎么演化出来的。希望对架构师设计和落地微服务架构有所启发。">
+<meta name="twitter:image" content="http://yoursite.com/images/2018060702/zuul.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="波波微课" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/leaf_32x32.png# path to favicon" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?a1339bc62c790c0cc12a7a8ef4ed8d50";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">波波微课</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/bobo.jpg" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/bobo.jpg" />
+            <h2 id="name">波波老师</h2>
+            <h3 id="title">资深架构师 &amp; 框架研发总监</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>中国 上海</span>
+            <!--<a id="follow" href="/">关注我</a>-->
+            <div id="follow" style="cursor:default;">扫描二维码关注我</div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                15
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/spring2go" target="_blank" title="github" class=tooltip>
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:yangbo@ppdai.com" target="_blank" title="email" class=tooltip>
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div style="text-align:center;padding:20px">
+            <img src="/images/qrcode.jpg" alt="公众号" style="width:100%;height:auto;">
+        </div>
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-2018060702" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/2018060702/zuul.png" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            微服务架构~BFF和网关是如何演化出来的
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/06/07/2018060702/">
+            <time datetime="2018-06-07T05:51:33.000Z" itemprop="datePublished">2018-06-07</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/微服务架构/">微服务架构</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/BFF/">BFF</a>, <a class="tag-link" href="/tags/微服务/">微服务</a>, <a class="tag-link" href="/tags/网关/">网关</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>BFF(Backend for Frontend)和网关Gateway是微服务架构中的两个重要概念，这两个概念相对比较新，有些开发人员甚至是架构师都不甚理解。</p>
+<p>本文用假想的公司案例+图示的方式，解释BFF和网关是什么，它们是怎么演化出来的。希望对架构师设计和落地微服务架构有所启发。</p>
+<a id="more"></a>
+<h3 id="服务化架构V1"><a href="#服务化架构V1" class="headerlink" title="服务化架构V1"></a>服务化架构V1</h3><p>我们先把时间推回到大致2011年左右。假设有一家有一定业务体量的电商公司CoolShop，在这个时间点它已经完成单块应用的解构拆分，内部SOA服务化已经初步完成。这个时候它的无线应用还没有起步，前端用户体验层主要是传统的服务端Web应用，总体服务化架构V1如下图所示。</p>
+<p><img src="/images/2018060702/soa_v1.png" alt="soa v1"></p>
+<h3 id="服务化架构V2"><a href="#服务化架构V2" class="headerlink" title="服务化架构V2"></a>服务化架构V2</h3><p>时间转眼来到2012年初，国内的无线应用开始起风，CoolShop公司也紧跟市场趋势，研发自己的无线原生App。为了能尽快上线，公司的架构师提出如下V2架构，让App直接调用内部的服务：</p>
+<p><img src="/images/2018060702/soa_v2.png" alt="soa v2"></p>
+<p>这个架构有如下问题：</p>
+<ol>
+<li>无线App和内部微服务强耦合，任何一边的变化都可能对另外一边造成影响。</li>
+<li>无线App需要知道内部服务的地址等细节。</li>
+<li>无线App端需要开发大量的聚合裁剪和适配逻辑：<ul>
+<li><strong>聚合</strong>：某一个功能需要同时调用几个后端API进行组合，比如首页需要显示分类和产品细节，就要同时调用分类API和产品API，不能一次调用完成。</li>
+<li><strong>裁剪</strong>：后端服务返回的Payload一般比较通用，App需要根据设备类型进行裁剪，比如手机屏幕小，需要多裁掉一些不必要的内容，Pad的屏幕比较大，可以少裁掉一些内容。</li>
+<li><strong>适配</strong>：一种常见的适配场景是格式转换，比如有些后台服务比较老，只支持老的SOAP/XML格式，不支持新的JSON格式，则无线App需要适配处理不同数据格式。</li>
+</ul>
+</li>
+<li>随着设备类型的增多(iPhone/Android/iPad/WindowsPhone)，聚合裁剪和适配逻辑的开发会造成设备端的大量重复劳动。</li>
+</ol>
+<h3 id="服务化架构V2-1"><a href="#服务化架构V2-1" class="headerlink" title="服务化架构V2.1"></a>服务化架构V2.1</h3><p>V2架构问题太多，没有开发实施。为解决上述问题，架构师经过思考决定在外部设备和内部微服务之间引入一个新的角色~Mobile BFF。</p>
+<p>所谓BFF其实是Backend for Frontend的简称，中文翻译是为前端而开发的后端，它主要由前端团队开发（后端微服务一般由后端团队开发）。BFF可以认为是一种适配服务，将后端的微服务进行适配（主要包括聚合裁剪和格式适配等逻辑），向无线端设备暴露友好和统一的API，方便无线设备接入访问后端服务。</p>
+<p>新的V2.1架构如下图所以：</p>
+<p><img src="/images/2018060702/soa_v2.1.png" alt="soa v2.1"></p>
+<p>这个架构的优势是：</p>
+<ol>
+<li>无线App和内部微服务不耦合，通过引入BFF这层间接，使得两边可以独立变化：<ul>
+<li>后端如果发生变化，通过BFF屏蔽，前端设备可以做到不受影响。</li>
+<li>前端如果发生变化，通过BFF屏蔽，后端微服务可以暂不变化。</li>
+<li>当无线App有新的需求时，通过BFF的屏蔽，可以减少前后端团队的沟通协调开销，很多需求由前端团队在BFF上就可以自己搞定。</li>
+</ul>
+</li>
+<li>无线App只需要知道Mobile BFF的地址，并且服务接口是统一的，不需要知道内部复杂微服务的地址和细节。</li>
+<li>聚合裁剪和适配逻辑在Mobile BFF上实现，无线App端可以大大简化瘦身。</li>
+</ol>
+<h3 id="服务化架构V3"><a href="#服务化架构V3" class="headerlink" title="服务化架构V3"></a>服务化架构V3</h3><p>V2.1架构比较成功，实施落地以后支持了CoolShop公司早期无线业务的成长。随着业务量进一步增长，投入无线研发的团队也不断增加，V2.1架构也逐渐暴露出如下问题：</p>
+<ol>
+<li>刚开始只有一个Mobile BFF，是个单块，但是无线研发团队在不断增加，分别对应多条业务线。根据康威法则，单块的无线BFF和多团队之间就出现不匹配问题，团队之间沟通协调成本高，交付效率低下。</li>
+<li>Mobile BFF里头不仅有各个业务线的聚合/裁剪/适配和业务逻辑，还引入了很多跨横切面逻辑，比如安全认证，日志监控，限流熔断等。随着时间的推移，代码变得越来越复杂，技术债越堆越多，开发效率不断下降，缺陷数量不断增加。</li>
+<li>Mobile BFF集群是个失败单点(Single Point of Failure)，严重代码缺陷或者流量洪峰可能引发集群宕机，所有无线应用都不可用。</li>
+</ol>
+<p>为了解决上述问题，架构师经过思考决定在外部设备和内部BFF之间再引入一个新的角色~API Gateway，新的架构V3如下图所示：</p>
+<p><img src="/images/2018060702/soa_v3.png" alt="soa v3"></p>
+<p>新的架构V3有如下调整：</p>
+<ol>
+<li>BFF按团队或业务线进行解耦拆分，拆分成若干个BFF微服务，每个业务线可以并行开发和交付各自负责的BFF微服务。</li>
+<li>网关（一般由独立框架团队负责运维）专注跨横切面(Cross-Cutting Concerns)的功能，包括：<ul>
+<li><strong>路由</strong>，将来自无线设备的请求路由到后端的某个微服务BFF集群。</li>
+<li><strong>认证</strong>，对涉及敏感数据的API访问进行集中认证鉴权。</li>
+<li><strong>监控</strong>，对API调用进行性能监控。</li>
+<li><strong>限流熔断</strong>，当出现流量洪峰，或者后端BFF/微服务出现延迟或故障，网关能够主动进行限流熔断，保护后端服务，并保持前端用户体验可以接受。</li>
+<li><strong>安全防爬</strong>，收集访问日志，通过后台分析出恶意行为，并阻断恶意请求。</li>
+</ul>
+</li>
+<li>网关在无线设备和BFF之间又引入了一层间接，让两边可以独立变化，特别是当后台BFF在升级或迁移时，可以做到用户端应用不受影响。</li>
+</ol>
+<p>在新的V3架构中，网关承担了重要的角色，它是解耦拆分和后续升级迁移的利器。在网关的配合下，单块BFF实现了解耦拆分，各业务线团队可以独立开发和交付各自的微服务，研发效率大大提升。另外，把跨横切面逻辑从BFF剥离到网关上去以后，BFF的开发人员可以更加专注业务逻辑交付，实现了架构上的关注分离(Separation of Concerns)。</p>
+<h3 id="服务化架构V4"><a href="#服务化架构V4" class="headerlink" title="服务化架构V4"></a>服务化架构V4</h3><p>业务在不断发展，技术架构也需要不断的调整来应对需求的变化。近年，CoolShop公司技术团队又迎来了新的业务和技术需求，主要是：</p>
+<ol>
+<li>开放内部的业务能力，建设CoolShop Open API平台。借助第三方社区开发者的力量，在CoolShop平台上进行创新，进一步拓宽CoolShop的应用和业务形态。</li>
+<li>废弃传统的服务端Web应用模式，引入前后分离架构，前端采用H5单页等技术给用户提供更好的体验。</li>
+</ol>
+<p>为满足业务需求，架构师对服务化架构又进行了拓展升级，新的V4新架构如下图所示：</p>
+<p><img src="/images/2018060702/soa_v4.png" alt="soa v4"></p>
+<p>V4整体思路和V3类似，只是拓展了新的接入渠道:</p>
+<ol>
+<li>引入面向第三方开放API的BFF层和配套的网关，支持第三方开发者在CoolShop Open API平台上开发应用。</li>
+<li>引入面向H5应用的BFF层和配套的网关，支持前后分离和H5单页应用模式。</li>
+</ol>
+<p>V4是一个比较完整的现代微服务架构，从外到内依次分为：端用户体验层-&gt;网关层-&gt;BFF层-&gt;微服务层。整个架构层次清晰，职责分明，是一种灵活的能够支持业务不断创新的演化式架构。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ol>
+<li>在微服务架构中，BFF(Backend for Frontend)也称聚合层或者适配层，它主要承接一个适配角色：将内部复杂的微服务，适配成对各种不同用户体验（无线/Web/H5/第三方等）友好和统一的API。聚合裁剪适配是BFF的主要职责。</li>
+<li>在微服务架构中，网关专注解决跨横切面逻辑，包括路由、安全、监控和限流熔断等。网关一方面是拆分解耦的利器，同时让开发人员可以专注业务逻辑的实现，达成架构上的关注分离。</li>
+<li>端用户体验层-&gt;网关层-&gt;BFF层-&gt;微服务层，是现代微服务架构的典型分层方式，这个架构能够灵活应对业务需求的变化，是一种支持创新的演化式架构。</li>
+<li>技术和业务都在不断变化，架构师要不断调整架构应对这些的变化，BFF和网关都是架构演化的产物。</li>
+<li>波波近期和极客时间合作，推出一门叫《微服务架构160讲》的视频课程，其中第三个模块（预计6月推出），会对Netflix新近推出的微服务网关Zuul2的架构和实践进行深度剖析，欢迎大家关注。</li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2018/06/07/2018060701/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">微服务架构~为什么要配置中心</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060702/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060702/zuul.png)" alt="微服务架构~BFF和网关是如何演化出来的" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060702/" class="title">微服务架构~BFF和网关是如何演化出来的</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T05:51:33.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060701/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060701/th.jpg)" alt="微服务架构~为什么要配置中心" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060701/" class="title">微服务架构~为什么要配置中心</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T03:23:10.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052902/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052902/service1.jpg)" alt="微服务2.0技术栈选型手册" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052902/" class="title">微服务2.0技术栈选型手册</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T03:00:26.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052901/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052901/building_blocks.jpg)" alt="架构之道~四种核心架构思维" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052901/" class="title">架构之道~四种核心架构思维</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T02:49:22.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/28/20180528/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/20180528/Features-5.png)" alt="架构之道~现代发布模式" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/28/20180528/" class="title">架构之道~现代发布模式</a></p>
+                            <p class="item-date"><time datetime="2018-05-28T08:33:31.000Z" itemprop="datePublished">2018-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术管理/">技术管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统架构/">系统架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/BFF/" style="font-size: 10px;">BFF</a> <a href="/tags/Netflix/" style="font-size: 10px;">Netflix</a> <a href="/tags/创建模式/" style="font-size: 10px;">创建模式</a> <a href="/tags/发布模式/" style="font-size: 10px;">发布模式</a> <a href="/tags/工程师成长/" style="font-size: 10px;">工程师成长</a> <a href="/tags/微服务/" style="font-size: 20px;">微服务</a> <a href="/tags/技术转型/" style="font-size: 10px;">技术转型</a> <a href="/tags/技术选型/" style="font-size: 16.67px;">技术选型</a> <a href="/tags/架构思维/" style="font-size: 10px;">架构思维</a> <a href="/tags/架构理念/" style="font-size: 10px;">架构理念</a> <a href="/tags/架构设计/" style="font-size: 10px;">架构设计</a> <a href="/tags/结构模式/" style="font-size: 10px;">结构模式</a> <a href="/tags/网关/" style="font-size: 10px;">网关</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/配置中心/" style="font-size: 10px;">配置中心</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 <i class="fa fa-heart"></i> 波波微课<br>
+            <span id="busuanzi_container_site_pv">访问量 <span id="busuanzi_value_site_pv" style="color:#49c8fb;font-size:16px;"></span> 次</span>&nbsp;
+            <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv" style="color:#49c8fb;font-size:16px;"></span> 人次</span>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+    <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = '{{ theme.comment.valine.guest_info }}';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'Bk7O038fcRfCk1WIcrhXopLO-9Nh9j0Va',
+        app_key: 'Otvliugzag188cyB1ojvmAB5',
+        placeholder: '',
+        avatar: '',
+        guest_info: GUEST,
+        pageSize: '10' || 10,
+    });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

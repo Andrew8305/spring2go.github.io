@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>架构师必须知道的架构设计原则 | 波波微课</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言如果一个技术已经存在3年，比如现在很火的前端技术react和vue等，那么我能预估这个技术大致还有3年的生命期，再久就不确定了；如果一个架构或设计原则已经存在15年，例如单一职责和依赖倒置原则，我可以预期它还有15年甚至更久的生命期。原则是比具体技术更抽象，更接近事物本质，也更经得起时间考验的东西。这些原则沉淀在架构师的脑海中，最终内化成他的mindset，以潜意识方式影响和指导他的架构和设计">
+<meta name="keywords" content="架构设计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="架构师必须知道的架构设计原则">
+<meta property="og:url" content="http://yoursite.com/2018/05/21/20180521/index.html">
+<meta property="og:site_name" content="波波微课">
+<meta property="og:description" content="前言如果一个技术已经存在3年，比如现在很火的前端技术react和vue等，那么我能预估这个技术大致还有3年的生命期，再久就不确定了；如果一个架构或设计原则已经存在15年，例如单一职责和依赖倒置原则，我可以预期它还有15年甚至更久的生命期。原则是比具体技术更抽象，更接近事物本质，也更经得起时间考验的东西。这些原则沉淀在架构师的脑海中，最终内化成他的mindset，以潜意识方式影响和指导他的架构和设计">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/20180521/cz-pro-innovation-icon-375px.jpg">
+<meta property="og:updated_time" content="2018-06-15T08:07:44.931Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="架构师必须知道的架构设计原则">
+<meta name="twitter:description" content="前言如果一个技术已经存在3年，比如现在很火的前端技术react和vue等，那么我能预估这个技术大致还有3年的生命期，再久就不确定了；如果一个架构或设计原则已经存在15年，例如单一职责和依赖倒置原则，我可以预期它还有15年甚至更久的生命期。原则是比具体技术更抽象，更接近事物本质，也更经得起时间考验的东西。这些原则沉淀在架构师的脑海中，最终内化成他的mindset，以潜意识方式影响和指导他的架构和设计">
+<meta name="twitter:image" content="http://yoursite.com/images/20180521/cz-pro-innovation-icon-375px.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="波波微课" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/leaf_32x32.png# path to favicon" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?a1339bc62c790c0cc12a7a8ef4ed8d50";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">波波微课</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/bobo.jpg" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/bobo.jpg" />
+            <h2 id="name">波波老师</h2>
+            <h3 id="title">资深架构师 &amp; 框架研发总监</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>中国 上海</span>
+            <!--<a id="follow" href="/">关注我</a>-->
+            <div id="follow" style="cursor:default;">扫描二维码关注我</div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                15
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/spring2go" target="_blank" title="github" class=tooltip>
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:yangbo@ppdai.com" target="_blank" title="email" class=tooltip>
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div style="text-align:center;padding:20px">
+            <img src="/images/qrcode.jpg" alt="公众号" style="width:100%;height:auto;">
+        </div>
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-20180521" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/20180521/cz-pro-innovation-icon-375px.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            架构师必须知道的架构设计原则
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/05/21/20180521/">
+            <time datetime="2018-05-21T06:30:56.000Z" itemprop="datePublished">2018-05-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/系统架构/">系统架构</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/架构设计/">架构设计</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>如果一个技术已经存在3年，比如现在很火的前端技术react和vue等，那么我能预估这个技术大致还有3年的生命期，再久就不确定了；如果一个架构或设计原则已经存在15年，例如单一职责和依赖倒置原则，我可以预期它还有15年甚至更久的生命期。原则是比具体技术更抽象，更接近事物本质，也更经得起时间考验的东西。这些原则沉淀在架构师的脑海中，最终内化成他的mindset，以潜意识方式影响和指导他的架构和设计工作。</p>
+<p>一晃我在软件研发行业工作十多个年头了，前面大部分时间做架构设计和开发，现在转型做研发管理。随着时间的推移，很多技战术细节性的东西(工具，框架，编程语言)在我脑海中渐渐模糊，但是一些平时学习积累起来，并且在实践中加深体会的软件架构设计和组织原则，这些原则性的东西却丝毫没有被时间冲淡，反而愈加清新。现在即使我不在一线开发，但这些沉淀下来的原则仍然潜移默化地影响我的日常管理和部分架构设计指导工作。我想有必要总结一下那些业界知名，给我留下深刻印象的软件架构设计和组织原则，和大家一起分享。</p>
+<a id="more"></a>
+<h3 id="一、软件设计原则"><a href="#一、软件设计原则" class="headerlink" title="一、软件设计原则"></a>一、软件设计原则</h3><h4 id="GRASP通用职责分配软件模式"><a href="#GRASP通用职责分配软件模式" class="headerlink" title="GRASP通用职责分配软件模式"></a>GRASP通用职责分配软件模式</h4><p>来自Craig Larman的软件设计书《UML和模式应用》[附录1]，Larman在书中提出软件设计的关键任务是职责分配，并提炼总结出9种(5种核心+4种扩展)软件职责分配模式，这些模式是比GoF设计模式更抽象的元模式。</p>
+<h5 id="1-信息专家-Information-Expert"><a href="#1-信息专家-Information-Expert" class="headerlink" title="1. 信息专家(Information Expert)"></a>1. 信息专家(Information Expert)</h5><p>为对象分配职责的通用原则 – 把职责分配给拥有足够信息可以履行职责的专家</p>
+<h5 id="2-创建者-Creator"><a href="#2-创建者-Creator" class="headerlink" title="2. 创建者(Creator)"></a>2. 创建者(Creator)</h5><p>将创建A的职责赋给B，如果至少下面一种情况为真：</p>
+<ul>
+<li>B“包含”或者聚合A</li>
+<li>B记录A的实例</li>
+<li>B密切地使用A</li>
+<li>B拥有A的初始化数据</li>
+</ul>
+<h5 id="3-低耦合-Low-Coupling"><a href="#3-低耦合-Low-Coupling" class="headerlink" title="3. 低耦合(Low Coupling)"></a>3. 低耦合(Low Coupling)</h5><p>赋予职责使得对象间的耦合度尽可能低，最小化对象间的依赖和变更影响，最大化重用。</p>
+<h5 id="4-高内聚-High-Cohesion"><a href="#4-高内聚-High-Cohesion" class="headerlink" title="4. 高内聚(High Cohesion)"></a>4. 高内聚(High Cohesion)</h5><p>赋予职责使得每个对象的职责尽可能保持聚焦和单一，易于管理和理解。</p>
+<h5 id="5-控制器-Controller"><a href="#5-控制器-Controller" class="headerlink" title="5.控制器(Controller)"></a>5.控制器(Controller)</h5><p>把职责赋予系统、设备或者子系统的表示类(门面控制器)，或者某个用例的表示类(用例控制器)，让控制器接收事件并协调整个系统的运作。</p>
+<h5 id="6-多态-Polymorphism"><a href="#6-多态-Polymorphism" class="headerlink" title="6. 多态(Polymorphism)"></a>6. 多态(Polymorphism)</h5><p>将职责分配给多个具有同名方法的多态子类，运行时根据需要动态切换子类，让系统行为变得可插拔。</p>
+<h5 id="7-纯虚构-Pure-Fabrication"><a href="#7-纯虚构-Pure-Fabrication" class="headerlink" title="7. 纯虚构(Pure Fabrication)"></a>7. 纯虚构(Pure Fabrication)</h5><p>针对真实问题域中不存在，但是设计建模中有用的概念，设计虚构类并赋予职责。</p>
+<h5 id="8-间接-Indirection"><a href="#8-间接-Indirection" class="headerlink" title="8. 间接(Indirection)"></a>8. 间接(Indirection)</h5><p>在两个或者多个对象间有交互的情况下，为避免直接耦合，提高重用性，创建中间类并赋予职责，对象的交互交由中间类协调。</p>
+<h5 id="9-受保护的变化-Protected-Variation"><a href="#9-受保护的变化-Protected-Variation" class="headerlink" title="9. 受保护的变化(Protected Variation)"></a>9. 受保护的变化(Protected Variation)</h5><p>简单讲就是封装变化。识别系统中可能的不稳定或者变化，在不稳定组件上创建稳定的抽象接口，将可能的变化封装在接口之后，使得系统内部的不稳定或者变化不会对系统的其它部分产生不良影响。</p>
+<h4 id="SOLID面向对象设计原则"><a href="#SOLID面向对象设计原则" class="headerlink" title="SOLID面向对象设计原则"></a>SOLID面向对象设计原则</h4><h5 id="1-单一职责原则-The-Single-Responsibility-Principle"><a href="#1-单一职责原则-The-Single-Responsibility-Principle" class="headerlink" title="1. 单一职责原则(The Single Responsibility Principle)"></a>1. 单一职责原则(The Single Responsibility Principle)</h5><p>修改某个类的理由应该只有一个，如果超过一个，说明类承担不止一个职责，要视情况拆分。</p>
+<p><img src="/images/20180521/srp.png" alt="srp"></p>
+<h5 id="2-开放封闭原则-The-Open-Closed-Principle"><a href="#2-开放封闭原则-The-Open-Closed-Principle" class="headerlink" title="2. 开放封闭原则(The Open Closed Principle)"></a>2. 开放封闭原则(The Open Closed Principle)</h5><p>软件实体应该对扩展开放，对修改封闭。一般不要直接修改类库源码（即使你有源代码），通过继承等方式扩展。</p>
+<p><img src="/images/20180521/ocp.png" alt="ocp"></p>
+<h5 id="3-里氏替代原则-The-Liskov-Substitution-Principle"><a href="#3-里氏替代原则-The-Liskov-Substitution-Principle" class="headerlink" title="3. 里氏替代原则(The Liskov Substitution Principle)"></a>3. 里氏替代原则(The Liskov Substitution Principle)</h5><p>当一个子类的实例能够被替换成任何超类的实例时，它们之间才是真正的is-a关系。</p>
+<p><img src="/images/20180521/lsp.png" alt="lsp"></p>
+<h5 id="4-依赖倒置原则-The-Dependency-Inversion-Principle"><a href="#4-依赖倒置原则-The-Dependency-Inversion-Principle" class="headerlink" title="4. 依赖倒置原则(The Dependency Inversion Principle)"></a>4. 依赖倒置原则(The Dependency Inversion Principle)</h5><p>高层模块不应该依赖于底层模块，二者都应该依赖于抽象。换句话说，依赖于抽象，不要依赖于具体实现。比方说，你不会把电器电源线焊死在室内电源接口处，而是用标准的插头插在标准的插座(抽象)上。</p>
+<p><img src="/images/20180521/dip.png" alt="dip"></p>
+<h5 id="5-接口分离原则-The-Interface-Segregation-Principle"><a href="#5-接口分离原则-The-Interface-Segregation-Principle" class="headerlink" title="5. 接口分离原则(The Interface Segregation Principle)"></a>5. 接口分离原则(The Interface Segregation Principle)</h5><p>不要强迫用户去依赖它们不使用的接口。换句话说，使用多个专门的接口比使用单一的大而全接口要好。</p>
+<p><img src="/images/20180521/isp.png" alt="isp"></p>
+<h4 id="我的解读"><a href="#我的解读" class="headerlink" title="我的解读"></a>我的解读</h4><ol>
+<li>我职业早年主要关注软件设计和编程，所以花蛮多时间学习和消化GRASP和SOLID设计原则。这些原则对我影响很深，尤其是单一职责，信息专家，关注分离，依赖倒置/封装变化，分而治之等核心原则，现在日常研发中我时常用这些原则指导新手工程师。</li>
+<li><strong>高内聚+低耦合</strong>，就像道中的一阴一阳，是所有其它OO设计原则的原则(元原则)，其它设计原则都是在这两个基础上泛化衍生出来的。</li>
+<li>上述原则虽然是针对OO设计和编程提出，但是对于大规模系统架构仍然适用。比如，微服务架构就体现了：<ul>
+<li>单一职责：一个微服务尽可能要职责单一，提供的接口也尽可能单一(接口分离原则)，安全/路由/限流等跨横切面的关注点(Cross-Cutting Concerns)由独立网关负责，体现关注分离(Separation of Concerns)。</li>
+<li>信息专家：当不确定哪个团队应该负责某个微服务时，一般原则也是谁拥有数据谁负责，基于有界上下文Bounded Context（一般是边界比较清晰的领域数据源）构建微服务。</li>
+<li>松散耦合：服务之间通过HTTP/JSON等轻量机制通信，服务之间不强耦合。</li>
+<li>受保护的变化和依赖倒置：服务之间只依赖抽象接口，实现可能随时变化。</li>
+<li>间接：网关在外面的客户端和内部的服务之间增加了一层间接，使两者不强耦合，可以相互独立演化。</li>
+</ul>
+</li>
+<li>作为架构师或者设计师，有两个设计能力是需要重点培养的，也是最难和最能体现架构设计水平的：<ul>
+<li><strong>合理的职责分配能力</strong>，也就是每个类/组件/子系统应该承担什么职责，如何保证职责单一，它们之间如何协作；</li>
+<li><strong>系统抽象和核心领域建模能力</strong>，需要深入一线业务域。</li>
+</ul>
+</li>
+</ol>
+<h3 id="二、分布式系统架构设计原则和理论"><a href="#二、分布式系统架构设计原则和理论" class="headerlink" title="二、分布式系统架构设计原则和理论"></a>二、分布式系统架构设计原则和理论</h3><h4 id="AKF架构原则"><a href="#AKF架构原则" class="headerlink" title="AKF架构原则"></a>AKF架构原则</h4><p>这15个架构原则来自《架构即未来(The Art of Scalability)》[附录2]一书，作者马丁L.阿伯特和迈克尔T.费舍尔分别是eBay和PayPal的前CTO，他们经历过eBay和PayPal大规模分布式电商平台的架构演进，在一线实战经验的基础上总结并提炼出15条架构原则：</p>
+<h5 id="1-N-1设计"><a href="#1-N-1设计" class="headerlink" title="1. N + 1设计"></a>1. N + 1设计</h5><p>永远不要少于两个，通常为三个。比方说无状态的Web/API一般部署至少&gt;=2个。</p>
+<h5 id="2-回滚设计"><a href="#2-回滚设计" class="headerlink" title="2. 回滚设计"></a>2. 回滚设计</h5><p>确保系统可以回滚到以前发布过的任何版本。可以通过发布系统保留历史版本，或者代码中引入动态开关切换机制(Feature Switch)。</p>
+<h5 id="3-禁用设计"><a href="#3-禁用设计" class="headerlink" title="3. 禁用设计"></a>3. 禁用设计</h5><p>能够关闭任何发布的功能。新功能隐藏在动态开关机制(Feature Switch)后面，可以按需一键打开，如发现问题随时关闭禁用。</p>
+<h5 id="4-监控设计"><a href="#4-监控设计" class="headerlink" title="4. 监控设计"></a>4. 监控设计</h5><p>在设计阶段就必须考虑监控，而不是在实施完毕之后补充。例如在需求阶段就要考虑关键指标监控项，这就是度量驱动开发(Metrics Driven Development)的理念。</p>
+<h5 id="5-设计多活数据中心"><a href="#5-设计多活数据中心" class="headerlink" title="5. 设计多活数据中心"></a>5. 设计多活数据中心</h5><p>不要被一个数据中心的解决方案把自己限制住。当然也要考虑成本和公司规模发展阶段。</p>
+<h5 id="6-使用成熟的技术"><a href="#6-使用成熟的技术" class="headerlink" title="6. 使用成熟的技术"></a>6. 使用成熟的技术</h5><p>只用确实好用的技术。商业组织毕竟不是研究机构，技术要落地实用，成熟的技术一般坑都被踩平了，新技术在完全成熟前一般需要踩坑躺坑。</p>
+<h5 id="7-异步设计"><a href="#7-异步设计" class="headerlink" title="7. 异步设计"></a>7. 异步设计</h5><p>能异步尽量用异步，只有当绝对必要或者无法异步时，才使用同步调用。</p>
+<h5 id="8-无状态系统"><a href="#8-无状态系统" class="headerlink" title="8. 无状态系统"></a>8. 无状态系统</h5><p>尽可能无状态，只有当业务确实需要，才使用状态。无状态系统易于扩展，有状态系统不易扩展且状态复杂时更易出错。</p>
+<h5 id="9-水平扩展而非垂直升级"><a href="#9-水平扩展而非垂直升级" class="headerlink" title="9. 水平扩展而非垂直升级"></a>9. 水平扩展而非垂直升级</h5><p>永远不要依赖更大、更快的系统。一般公司成长到一定阶段普遍经历过买更大、更快系统的阶段，即使淘宝当年也买小型机扛流量，后来扛不住才体会这样做不scalable，所以才有后来的去IOE行动。</p>
+<h5 id="10-设计时至少要有两步前瞻性"><a href="#10-设计时至少要有两步前瞻性" class="headerlink" title="10. 设计时至少要有两步前瞻性"></a>10. 设计时至少要有两步前瞻性</h5><p>在扩展性问题发生前考虑好下一步的行动计划。架构师的价值就体现在这里，架构设计对于流量的增长要有提前量。</p>
+<h5 id="11-非核心则购买"><a href="#11-非核心则购买" class="headerlink" title="11. 非核心则购买"></a>11. 非核心则购买</h5><p>如果不是你最擅长，也提供不了差异化的竞争优势则直接购买。避免Not Invented Here症状，避免凡事都要重造轮子，毕竟达成业务目标才是重点。</p>
+<h5 id="12-使用商品化硬件"><a href="#12-使用商品化硬件" class="headerlink" title="12. 使用商品化硬件"></a>12. 使用商品化硬件</h5><p>在大多数情况下，便宜的就是最好的。这点和第9点是一致的，通过商品化硬件水平扩展，而不是买更大、更快的系统。</p>
+<h5 id="13-小构建、小发布和快试错"><a href="#13-小构建、小发布和快试错" class="headerlink" title="13. 小构建、小发布和快试错"></a>13. 小构建、小发布和快试错</h5><p>全部研发要小构建，不断迭代，让系统不断成长。这个和微服务理念一致。</p>
+<h5 id="14-隔离故障"><a href="#14-隔离故障" class="headerlink" title="14. 隔离故障"></a>14. 隔离故障</h5><p>实现故障隔离设计，通过断路保护避免故障传播和交叉影响。通过舱壁泳道等机制隔离失败单元(Failure Unit)，一个单元的失败不至影响其它单元的正常工作。</p>
+<h5 id="15-自动化"><a href="#15-自动化" class="headerlink" title="15. 自动化"></a>15. 自动化</h5><p>设计和构建自动化的过程。如果机器可以做，就不要依赖于人。自动化是DevOps的基础。</p>
+<h4 id="我的解读-1"><a href="#我的解读-1" class="headerlink" title="我的解读"></a>我的解读</h4><ol>
+<li>这15条架构原则基本上是eBay在发展，经历过流量数量级增长冲击过程中，通过不断踩坑踩出来的，是干货中的干货。消化吸收这15条原则，基本可保系统架构不会有原则性问题。</li>
+<li>这15条原则同样适用于现在的微服务架构。eBay发展较早，它内部其实很早(差不多2010年前)就已形成完善的微服务生态，只是没有提出微服务这个概念。</li>
+<li>这15条原则可根据TTM(Time To Market)，可用性/可扩展性/质量，成本/效率分布在三个环内，如下图所示:</li>
+</ol>
+<p><img src="/images/20180521/akf.png" alt="akf"></p>
+<h4 id="十二要素应用"><a href="#十二要素应用" class="headerlink" title="十二要素应用"></a>十二要素应用</h4><p>Heroku[附录3]是国外知名的云应用平台。基于上百万应用的托管和运营经验，创始人Adam Wiggins提出了12要素应用宣言[附录4]。简单讲，满足这12个要素的应用是比较容易云化并居住在Heroku平台上的。</p>
+<h5 id="1-基准代码"><a href="#1-基准代码" class="headerlink" title="1. 基准代码"></a>1. 基准代码</h5><p>一份基准代码，多份部署。如果用镜像部署方式，则一个镜像可以部署到多个环境(测试，预发，生产)，而不是给每个环境制作一个不同镜像。</p>
+<h5 id="2-依赖"><a href="#2-依赖" class="headerlink" title="2. 依赖"></a>2. 依赖</h5><p>显式声明依赖。如果用镜像部署，则一般依赖被直接打在镜像中，或者声明在docker file中。</p>
+<h5 id="3-配置"><a href="#3-配置" class="headerlink" title="3. 配置"></a>3. 配置</h5><p>在环境中存储配置。在Heroku或者类似的PaaS平台上，配置一般是推荐注入到环境变量中的。现在采用集中式配置中心也是一种流行方式。</p>
+<h5 id="4-后端服务"><a href="#4-后端服务" class="headerlink" title="4. 后端服务"></a>4. 后端服务</h5><p>把后端服务(例如缓存，数据库，MQ等)当作附加资源，相关配置和连接字符串通过环境变量注入，或者采用配置中心。</p>
+<h5 id="5-构建、发布和运行"><a href="#5-构建、发布和运行" class="headerlink" title="5. 构建、发布和运行"></a>5. 构建、发布和运行</h5><p>严格分离构建和运行。如果使用镜像部署，则构建、发布/运行是通过镜像这种中间格式严格分离的。</p>
+<h5 id="6-进程"><a href="#6-进程" class="headerlink" title="6. 进程"></a>6. 进程</h5><p>一个或者多个无状态的进程运行应用。容器运行时相当于进程，适用于无状态Web/API。</p>
+<h5 id="7-端口绑定"><a href="#7-端口绑定" class="headerlink" title="7. 端口绑定"></a>7. 端口绑定</h5><p>通过端口绑定提供服务。容器也是通过端口绑定对外提供服务。</p>
+<h5 id="8-并发"><a href="#8-并发" class="headerlink" title="8. 并发"></a>8. 并发</h5><p>通过进程模型进行扩展。容器运行时相当于进程，通过起多个容器可以任意扩展并发数量。</p>
+<h5 id="9-易处理"><a href="#9-易处理" class="headerlink" title="9. 易处理"></a>9. 易处理</h5><p>快速启动和优雅终止可最大化健壮性。docker容器支持秒级启动和关闭。</p>
+<h5 id="10-开发环境和线上环境等价"><a href="#10-开发环境和线上环境等价" class="headerlink" title="10. 开发环境和线上环境等价"></a>10. 开发环境和线上环境等价</h5><p>尽可能保持开发、测试、预发和线上环境相同。容器可以保证容器内运行时环境的一致性，还需要保证不同环境的一致性，例如不同环境内的操作系统，负载均衡，服务发现，后台服务，监控告警等要尽可能一致。</p>
+<h5 id="11-日志"><a href="#11-日志" class="headerlink" title="11. 日志"></a>11. 日志</h5><p>把日志当作数据流。Heroku不支持本地文件，所以必须以流方式把日志输送到后台日志服务。除了日志以外还要补充考虑metrics流的采集和输送。</p>
+<h5 id="12-管理进程"><a href="#12-管理进程" class="headerlink" title="12. 管理进程"></a>12. 管理进程</h5><p>后台管理任务当作一次性的进程。其实相当于在Heroku上以独立进程方式运行任务Job。</p>
+<h4 id="我的解读-2"><a href="#我的解读-2" class="headerlink" title="我的解读"></a>我的解读</h4><ol>
+<li>12要素应用也是当前云原生应用(Cloud Native App)的参考标准，我把这12要素也称为云应用迁移原则。满足这12个要素的应用，可以比较顺利迁移到各种云平台(Kubernetes, Marathon, Cloud Foundry等)上。</li>
+<li>对于面临企业遗留应用改造和云化迁移的架构师，可以重点参考这12条迁移原则。</li>
+<li>Docker容器技术可以认为是为云迁移量身定制的技术。容器化是后续云迁移的捷径，所以遗留应用改造可以先想办法做到容器化。</li>
+</ol>
+<h4 id="CAP定理"><a href="#CAP定理" class="headerlink" title="CAP定理"></a>CAP定理</h4><p>2000年7月，加州大学伯克利分校的Eric Brewer教授在ACM PODC会议上提出CAP猜想。2年后，麻省理工学院的Seth Gilbert和Nancy Lynch从理论上证明了CAP。之后，CAP理论正式成为分布式计算领域的公认定理。</p>
+<p>CAP认为：一个分布式系统最多同时满足一致性(Consistency)，可用性(Availability)和分区容忍性(Partition Tolerance)这三项中的两项。</p>
+<h5 id="1-一致性-Consistency"><a href="#1-一致性-Consistency" class="headerlink" title="1. 一致性(Consistency)"></a>1. 一致性(Consistency)</h5><p>一致性指“all nodes see the same data at the same time”，即更新操作成功，所有节点在同一时间的数据完全一致。</p>
+<h5 id="2-可用性-Availability"><a href="#2-可用性-Availability" class="headerlink" title="2. 可用性(Availability)"></a>2. 可用性(Availability)</h5><p>可用性指“Reads and writes always succeed”，即服务一直可用，而且响应时间正常。</p>
+<h5 id="3-分区容忍性-Partition-tolerance"><a href="#3-分区容忍性-Partition-tolerance" class="headerlink" title="3. 分区容忍性(Partition tolerance)"></a>3. 分区容忍性(Partition tolerance)</h5><p>分区容忍性指“the system continue to operate despite arbitrary message loss or failure of part of the system.”，即分布式系统在遇到某节点或网络分区故障时，仍然能够对外提供满足一致性和可用性的服务。</p>
+<p><img src="/images/20180521/cap.png" alt="cap"></p>
+<h4 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h4><p>eBay架构师Dan Pritchett基于对大规模分布式系统的实践总结，在ACM上发表文章提出了BASE理论，BASE理论是对于CAP理论的延伸，核心思想是即使无法做到强一致性(Strong Consistency，CAP中的一致性指强一致性)，但是可以采用适当的方式达到最终一致性(Eventual Consistency)。</p>
+<p>BASE指基本可用(Basically Available)、软状态(Soft State)和最终一致性(Eventual Consistency)。</p>
+<h5 id="1-基本可用-Basically-Available"><a href="#1-基本可用-Basically-Available" class="headerlink" title="1. 基本可用(Basically Available)"></a>1. 基本可用(Basically Available)</h5><p>基本可用是指分布式系统在出现故障时，允许损失部分可用性，即保证核心可用。比如服务降级。</p>
+<h5 id="2-软状态-Soft-State"><a href="#2-软状态-Soft-State" class="headerlink" title="2. 软状态(Soft State)"></a>2. 软状态(Soft State)</h5><p>软状态是指允许系统存在中间状态，而该中间状态不会影响系统的整体可用性。分布式存储中一般一份数据至少存三个副本，允许不同节点间副本同步的延迟就是软状态的体现。</p>
+<h5 id="3-最终一致性-Eventual-Consistency"><a href="#3-最终一致性-Eventual-Consistency" class="headerlink" title="3. 最终一致性(Eventual Consistency)"></a>3. 最终一致性(Eventual Consistency)</h5><p>最终一致性是指系统中的所有数据副本经过一段时间后，最终能够达成一致状态。弱一致性和强一致性相反，最终一致性是弱一致性的一种特殊情况。</p>
+<p><img src="/images/20180521/base.png" alt="base"></p>
+<h4 id="我的解读-3"><a href="#我的解读-3" class="headerlink" title="我的解读"></a>我的解读</h4><ol>
+<li>CAP和BASE理论可以抠得很深，背后甚至有很复杂的数学证明。我理解得相对简单浅显：性能、高可用、不丢数据和数据一致性对分布式系统来说一般是强需求，随着流量的增长，复制和分区在所难免：<ul>
+<li>复制(replication)：数据在多个节点上存多份保证不丢和高可用；</li>
+<li>分区(partition)：数据按某个纬度切分分布在不同节点上分摊流量压力保证高性能，同时也是为了降低每个节点的复杂性。例如数据库的分库分表，系统拆分微服务化也是一种分区。<br>这两者都会带来一致性问题，一致性在时间上有一点妥协的余地-即是最终一致性；时间上要求强一致的话，只有可用性可以适当折中。系统架构的游戏很大部分是和状态一致性作斗争的游戏。</li>
+</ul>
+</li>
+<li>选择使用分布式产品时，比如NoSQL数据库，你需要了解它在CAP环中所在的位置，确保它满足你的场景需要。</li>
+</ol>
+<h3 id="三、组织和系统改进原则"><a href="#三、组织和系统改进原则" class="headerlink" title="三、组织和系统改进原则"></a>三、组织和系统改进原则</h3><h4 id="康威法则"><a href="#康威法则" class="headerlink" title="康威法则"></a>康威法则</h4><p>Melvin Conway在1967年提出所谓康威法则[附录5]，指出组织架构和系统架构之间有一种隐含的映射关系：</p>
+<blockquote>
+<p>Organization which design system […] are constrained to produce designs which are copies of the communication structures of these organization. 设计系统的组织其产生的设计等价于组织间的沟通结构。</p>
+</blockquote>
+<p><img src="/images/20180521/conway_law_1.png" alt="conway&#39;s law 1"></p>
+<p>康威法则也可以倒过来阐述：</p>
+<blockquote>
+<p>Conway’s law reversed：You won’t be able to successfully establish an efficient organization structure that is not supported by your system design(architecture)。  如果系统架构不支持，你无法建立一个高效的组织；同样，如果你的组织架构不支持，你也无法建立一个高效的系统架构。</p>
+</blockquote>
+<p><img src="/images/20180521/conway_law_2.png" alt="conway&#39;s law 2"></p>
+<h4 id="系统改进三原则"><a href="#系统改进三原则" class="headerlink" title="系统改进三原则"></a>系统改进三原则</h4><p>IT运维管理畅销书《凤凰项目》[附录8]的作者Gene Kim在调研了众多高效能IT组织后总结出支撑DevOps运作的三个原理(The Three Ways: The Principles Underpinning DevOps)[附录9]，我认为也是系统改进提升的一般性原理[附录7]，见下图：</p>
+<p><img src="/images/20180521/system_thinking.png" alt="system thinking"></p>
+<h5 id="原理一：系统思考-System-Thinking"><a href="#原理一：系统思考-System-Thinking" class="headerlink" title="原理一：系统思考(System Thinking)"></a>原理一：系统思考(System Thinking)</h5><p>开发驱动的组织，其能力不是制作软件，而是持续的交付客户价值。价值从业务需求开始，经过研发测试，到部署运维，依次流动，并最终以服务形式交付到客户手中。整个价值链流速并不依赖单个部分(团队或个人)的杰出工作，而是受整个价值链最薄弱环节(瓶颈)的限制。所以局部优化通常无效，反而招致全局受损。</p>
+<p>Gene Kim特别指出：</p>
+<blockquote>
+<p>Any improvements made anywhere besides the bottleneck are an illusion. 在瓶颈之外的任何优化提升都只是幻象。</p>
+</blockquote>
+<h5 id="原理二：强化反馈环-Amplify-Feedback-Loops"><a href="#原理二：强化反馈环-Amplify-Feedback-Loops" class="headerlink" title="原理二：强化反馈环(Amplify Feedback Loops)"></a>原理二：强化反馈环(Amplify Feedback Loops)</h5><p>过程改进常常通过加强反馈环来达成。原理二强调企业和客户之间、组织团队间、流程上和系统内的反馈环。没有测量就没有提升，反馈要以测量数据为准，通过反馈数据优化改进系统。</p>
+<h5 id="原理三：持续试验和学习的文化-Culture-of-Continual-Experimentation-And-Learning"><a href="#原理三：持续试验和学习的文化-Culture-of-Continual-Experimentation-And-Learning" class="headerlink" title="原理三：持续试验和学习的文化(Culture of Continual Experimentation And Learning)"></a>原理三：持续试验和学习的文化(Culture of Continual Experimentation And Learning)</h5><p>在企业管理文化层面强调勇于试错和持续试验、学习和改进的文化。</p>
+<h4 id="我的解读-4"><a href="#我的解读-4" class="headerlink" title="我的解读"></a>我的解读</h4><ol>
+<li>康威法则给我们的启示：系统架构和组织架构之间有隐含的映射关系，你不能单方面改变一方的结构，调整时必须两边联动。系统架构如果是耦合的，就很难组织分散式的团队结构，两边映射不起来，团队之间容易摩擦导致生产率下降。所以一般先按业务边界对单块应用进行解耦拆分，同时做相应的团队拆分，使两边可以映射，每个团队可以独立开发、测试和部署各自的微服务，进而提升生产率。这就是近年流行的微服务架构背后的组织原则。详见我之前发表的文章《企业的组织架构是如何影响技术架构的》[附录6]。</li>
+<li>系统思考要求我们加强团队合作，培养流式思维和瓶颈约束思维，找出瓶颈并针对性地优化。在研发型组织中，常见的系统瓶颈如运维机器资源提供(Provisioning)缓慢，发布流程繁琐容易出错，开发/测试／UAT环境缺失或不完善，遗留系统耦合历史负担重，基础研发平台薄弱等等。这些瓶颈点特别需要关注优化。</li>
+<li>反馈原理要求我们关注基于数据的反馈，技术上的手段包括大数据分析和系统各个层次的测量监控。没有测量就没有反馈，没有反馈就没有提升。</li>
+<li>在管理文化层面：<ul>
+<li>管理层要承认企业内部近50%的创新或流程改进项目是有可能失败的，即使失败，员工不会受到责罚，鼓励持续的试验和从中学习；</li>
+<li>管理层要有技术偿债意识，勿追求100%员工利用率，要预留20%~30%的时间给员工做创新和系统改进提升项目。</li>
+</ul>
+</li>
+</ol>
+<h3 id="四、写在最后"><a href="#四、写在最后" class="headerlink" title="四、写在最后"></a>四、写在最后</h3><p>上述原则是架构师必须深入理解和掌握的，但是不能盲从，实际工作中要根据业务、时间、资源和团队情况随机应变。原则有时甚至可以被违反，当然这样做一定有成本，架构师要意识这一点，并适时变通补偿。</p>
+<p>上述原则仅是我个人视角总结，有些理解难免偏颇。如果你认为我忽略了哪些重要的原则，或理解有误，请记得线下和我交流！</p>
+<h3 id="五、附录"><a href="#五、附录" class="headerlink" title="五、附录"></a>五、附录</h3><ol>
+<li><a href="https://www.amazon.cn/UML%E5%92%8C%E6%A8%A1%E5%BC%8F%E5%BA%94%E7%94%A8-%E6%8B%89%E6%9B%BC/dp/B00116WMSU" target="_blank" rel="noopener">UML和模式应用(原书第3版)</a></li>
+<li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B01DXW29IM" target="_blank" rel="noopener">架构即未来：现代企业可扩展的Web架构、流程和组织(原书第2版)</a></li>
+<li><a href="https://www.heroku.com/" target="_blank" rel="noopener">Heroku云应用平台</a></li>
+<li><a href="https://12factor.net/zh_cn/" target="_blank" rel="noopener">The Twelve-Factor App</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Conway%27s_law" target="_blank" rel="noopener">康威法则</a></li>
+<li><a href="http://www.infoq.com/cn/articles/organization-arch-influence-technology-arch" target="_blank" rel="noopener">企业的组织架构是如何影响技术架构的</a></li>
+<li><a href="http://www.sohu.com/a/123304174_467759" target="_blank" rel="noopener">痛定思痛，谈成长型公司应该如何突破方轮子困局!</a></li>
+<li><a href="https://www.amazon.cn/%E5%9B%BE%E4%B9%A6/dp/B016VW1I6U" target="_blank" rel="noopener">凤凰项目：一个IT运维的传奇故事</a></li>
+<li><a href="https://itrevolution.com/the-three-ways-principles-underpinning-devops/" target="_blank" rel="noopener">The Three Ways: The Principles Underpinning DevOps</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/05/23/20180523/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    聊聊Netflix技术那些大胆的创新
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/05/20/20180520/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">工程师成长快车道</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060702/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060702/zuul.png)" alt="微服务架构~BFF和网关是如何演化出来的" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060702/" class="title">微服务架构~BFF和网关是如何演化出来的</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T05:51:33.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060701/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060701/th.jpg)" alt="微服务架构~为什么要配置中心" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060701/" class="title">微服务架构~为什么要配置中心</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T03:23:10.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052902/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052902/service1.jpg)" alt="微服务2.0技术栈选型手册" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052902/" class="title">微服务2.0技术栈选型手册</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T03:00:26.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052901/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052901/building_blocks.jpg)" alt="架构之道~四种核心架构思维" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052901/" class="title">架构之道~四种核心架构思维</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T02:49:22.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/28/20180528/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/20180528/Features-5.png)" alt="架构之道~现代发布模式" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/28/20180528/" class="title">架构之道~现代发布模式</a></p>
+                            <p class="item-date"><time datetime="2018-05-28T08:33:31.000Z" itemprop="datePublished">2018-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术管理/">技术管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统架构/">系统架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/BFF/" style="font-size: 10px;">BFF</a> <a href="/tags/Netflix/" style="font-size: 10px;">Netflix</a> <a href="/tags/创建模式/" style="font-size: 10px;">创建模式</a> <a href="/tags/发布模式/" style="font-size: 10px;">发布模式</a> <a href="/tags/工程师成长/" style="font-size: 10px;">工程师成长</a> <a href="/tags/微服务/" style="font-size: 20px;">微服务</a> <a href="/tags/技术转型/" style="font-size: 10px;">技术转型</a> <a href="/tags/技术选型/" style="font-size: 16.67px;">技术选型</a> <a href="/tags/架构思维/" style="font-size: 10px;">架构思维</a> <a href="/tags/架构理念/" style="font-size: 10px;">架构理念</a> <a href="/tags/架构设计/" style="font-size: 10px;">架构设计</a> <a href="/tags/结构模式/" style="font-size: 10px;">结构模式</a> <a href="/tags/网关/" style="font-size: 10px;">网关</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/配置中心/" style="font-size: 10px;">配置中心</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 <i class="fa fa-heart"></i> 波波微课<br>
+            <span id="busuanzi_container_site_pv">访问量 <span id="busuanzi_value_site_pv" style="color:#49c8fb;font-size:16px;"></span> 次</span>&nbsp;
+            <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv" style="color:#49c8fb;font-size:16px;"></span> 人次</span>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+    <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = '{{ theme.comment.valine.guest_info }}';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'Bk7O038fcRfCk1WIcrhXopLO-9Nh9j0Va',
+        app_key: 'Otvliugzag188cyB1ojvmAB5',
+        placeholder: '',
+        avatar: '',
+        guest_info: GUEST,
+        pageSize: '10' || 10,
+    });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

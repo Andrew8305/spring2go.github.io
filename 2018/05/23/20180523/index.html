@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>聊聊Netflix技术那些大胆的创新 | 波波微课</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。 注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能">
+<meta name="keywords" content="Netflix">
+<meta property="og:type" content="article">
+<meta property="og:title" content="聊聊Netflix技术那些大胆的创新">
+<meta property="og:url" content="http://yoursite.com/2018/05/23/20180523/index.html">
+<meta property="og:site_name" content="波波微课">
+<meta property="og:description" content="前言昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。 注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/20180523/netflix.jpg">
+<meta property="og:updated_time" content="2018-06-15T11:49:52.286Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="聊聊Netflix技术那些大胆的创新">
+<meta name="twitter:description" content="前言昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。 注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能">
+<meta name="twitter:image" content="http://yoursite.com/images/20180523/netflix.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="波波微课" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/leaf_32x32.png# path to favicon" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?a1339bc62c790c0cc12a7a8ef4ed8d50";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">波波微课</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/bobo.jpg" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/bobo.jpg" />
+            <h2 id="name">波波老师</h2>
+            <h3 id="title">资深架构师 &amp; 框架研发总监</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>中国 上海</span>
+            <!--<a id="follow" href="/">关注我</a>-->
+            <div id="follow" style="cursor:default;">扫描二维码关注我</div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                15
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/spring2go" target="_blank" title="github" class=tooltip>
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:yangbo@ppdai.com" target="_blank" title="email" class=tooltip>
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div style="text-align:center;padding:20px">
+            <img src="/images/qrcode.jpg" alt="公众号" style="width:100%;height:auto;">
+        </div>
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-20180523" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/20180523/netflix.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            聊聊Netflix技术那些大胆的创新
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/05/23/20180523/">
+            <time datetime="2018-05-23T13:01:29.000Z" itemprop="datePublished">2018-05-23</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术管理/">技术管理</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/Netflix/">Netflix</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。</p>
+<p>注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能已经过时，但是Netflix的创新文化和精神仍然值得我们学习借鉴。</p>
+<a id="more"></a>
+<h3 id="一、大规模生产级微服务架构实践"><a href="#一、大规模生产级微服务架构实践" class="headerlink" title="一、大规模生产级微服务架构实践"></a>一、大规模生产级微服务架构实践</h3><p>微服务很多公司(eBay, Amazon, BAT)都有，甚至比Netflix做得更早，但Netflix大概是大规模生产级微服务做得最杰出的。</p>
+<p>100s范围的微服务，1000s范围的每日生产变更，10,000s范围的实例，1,000,000s范围的活跃客户数，1,000,000,000s范围的度量。但是只有10s范围的运维工程师，没有自己的数据中心NOC，应该算微服务DevOps的最高境界了。</p>
+<p><img src="/images/20180523/netflix_ecosystem.jpg" alt="netflix ecosystem"></p>
+<p><img src="/images/20180523/no_noc.jpg" alt="no noc"></p>
+<p><img src="/images/20180523/msa_visualization.jpg" alt="msa visualization"><br>Netflix微服务可视化。</p>
+<h3 id="二、开源整个微服务技术栈"><a href="#二、开源整个微服务技术栈" class="headerlink" title="二、开源整个微服务技术栈"></a>二、开源整个微服务技术栈</h3><p>Netflix微服务技术栈的核心组件基本上都是开源的。Pivotal在2~3年前把Netflix开源的这摊东西封装一下改头换面，再拼凑一些其它东西（配置中心，调用链监控等）就变成了Spring Cloud。现在大家耳熟能详的Zuul网关，Eureka服务发现注册中心，Hystrix熔断限流，Archaius配置等组件，Netflix在2012年左右就都开源出来了。</p>
+<p><img src="/images/20180523/oss_strategy.png" alt="oss strategy"><br>开放开源是Netflix的一种竞争战略。</p>
+<p><img src="/images/20180523/oss_goal.jpg" alt="oss goal"></p>
+<p>Netflix为啥热衷于要搞开源？</p>
+<ol>
+<li>将自己的解决方案建立为行业标准和最佳实践</li>
+<li>建立Netflix技术品牌</li>
+<li>雇佣、留住和吸引顶级工程师</li>
+<li>从共享生态中获得反馈输入并受益</li>
+</ol>
+<h3 id="三、系统全部迁移AWS公有云"><a href="#三、系统全部迁移AWS公有云" class="headerlink" title="三、系统全部迁移AWS公有云"></a>三、系统全部迁移AWS公有云</h3><p>大致在09/10年左右， Netflix就开始启动上公有云战略（当然背后也是吃了自建数据中心的苦头），应用逐步向AWS迁移，这个过程一共持续了将近5年，到15年的时候，迁移完毕，全部应用上到AWS。09/10年左右的AWS还不太成熟，别说当时，即使现在也没有几个大公司不掂量一下敢提全部迁移公有云的战略。另外AWS能有今天，Netflix也是功不可没，帮Amazon躺了无数的坑。</p>
+<p><img src="/images/20180523/migrate_to_aws.jpg" alt="migrate to aws"></p>
+<h3 id="四、在AWS基础上打造PaaS平台"><a href="#四、在AWS基础上打造PaaS平台" class="headerlink" title="四、在AWS基础上打造PaaS平台"></a>四、在AWS基础上打造PaaS平台</h3><p>Netflix在AWS IAAS的基础上封装打造了自己的PaaS云平台服务(大部分组件开源)，包括</p>
+<ol>
+<li>平台运行时服务(Eureka，Zuul, Edda，Atlas)</li>
+<li>平台库和框架(Karyon/Ribbon，Hystrix，RxJava, Governator，Servo, Archaius, Astyanax)</li>
+<li>平台大数据和缓存服务(Cassandra/ES/Hadoop Platform as a Service, EVCache，S3)</li>
+<li>平台工具和服务(Asgard/Aminator， SimianArmy/ChaosMonkey, ICE)</li>
+</ol>
+<p><img src="/images/20180523/netflix_cloud_stack.png" alt="netflix cloud stack"></p>
+<p><img src="/images/20180523/deployment_arch.png" alt="deployment arch"></p>
+<p>业内最近开始提出云原生(Cloud Native)架构的理念，Pivotal是这个理念的主要推动者（背后主要是要推它的Cloud Foundry产品）。其实Netflix在2013年就提出了Cloud Native理念，而且它的整个平台(AWS IAAS + PaaS)就是云原生的。</p>
+<h3 id="五、两地三中心高可用"><a href="#五、两地三中心高可用" class="headerlink" title="五、两地三中心高可用"></a>五、两地三中心高可用</h3><p>Netflix的高可用架构也是做得大气磅礴，同城部署3个对等的可用区(AWS Availability Zone)，1个甚至2个挂不影响可用性。</p>
+<p><img src="/images/20180523/zone.png" alt="zone"></p>
+<p>异地(Regions)再做对等部署，一个Region里头的AZ全挂，另外一个Region接着可用。</p>
+<p><img src="/images/20180523/region.png" alt="region"></p>
+<h3 id="六、采用Cassandra-NoSql作为主数据库"><a href="#六、采用Cassandra-NoSql作为主数据库" class="headerlink" title="六、采用Cassandra NoSql作为主数据库"></a>六、采用Cassandra NoSql作为主数据库</h3><p>Netflix原来用Oracle等传统Sql数据库，但是受到扩展性挑战。公司架构管理层大胆颠覆性提出使用Cassandra Nosql作为主要的持久化化存储机制，Netflix在2012年就做到大部分数据存放Cassandra和S3等非关系数据库上。这个架构决策也是非常大胆有魄力，一般没有几个公司敢这么干的。Cassandra本质上是一种KV数据库，更像sorted map存储，不支持事务，不支持join。在CAP理论中，Cassandra是展现AP特性，无中心分散式高可用，天然支持跨数据中心数据同步，这大概是Netflix最看重的特性。Cassandra是读慢写快的特性（一般数据库是读快写慢）,Netflix大量使用Memcached做缓存补偿。</p>
+<p><img src="/images/20180523/cassandra.png" alt="cassandra"></p>
+<p>Cassandra在同城多个Zone之间同步数据，在异地(Inter-Region)之间再同步，流量到9Gbits/s，延迟83ms，18TB的数据备份(2013年的数据)。</p>
+<h3 id="七、镜像部署和发布自动刹车"><a href="#七、镜像部署和发布自动刹车" class="headerlink" title="七、镜像部署和发布自动刹车"></a>七、镜像部署和发布自动刹车</h3><p>近年docker容器技术大火，大家都在谈不可变基础设施(immutable infrastructure)的理念，本质就是镜像部署。Netflix在2012年前就已经实现镜像部署，发布的单位是AMI(Amazon Machine Image)镜像，通过持续交付工具Asgard（现在升级版叫Spinnaker）直接将镜像推到AWS云中部署，支持蓝绿（需要至少两倍虚机），灰度和金丝雀等部署模式。</p>
+<p><img src="/images/20180523/paved_road.png" alt="paved road"></p>
+<p>Netflix的发布管道叫Paved Road，就是平台团队铺好的路，由提交，构建，AMI镜像烘焙(Image Baking)和发布四个阶段组成。</p>
+<p>金丝雀发布之后，系统会自动生成金丝雀健康报告和分数（背后需要统计上千个metrics + 复杂智能算法），达到一定的分数(比如80分)，才能继续roll out。这个也称发布自动刹车。</p>
+<p><img src="/images/20180523/canary_score.png" alt="canary score"></p>
+<p><img src="/images/20180523/canary_score2.png" alt="canary score 2"></p>
+<h3 id="八、反脆弱架构"><a href="#八、反脆弱架构" class="headerlink" title="八、反脆弱架构"></a>八、反脆弱架构</h3><p>Netflix大胆提出反脆弱架构的理念（架构师受到尼古拉斯·塔勒布《反脆弱》一书的启发，并将其应用到架构领域）：为了让你的系统更加健壮，不是将它们严格保护起来，而是主动随机性地的增加一些破坏性测试，逼迫研发人员做好高可用。</p>
+<p><img src="/images/20180523/chaos_monkey.jpg" alt="chaos monkey"></p>
+<p>Netflix从周一至周五，上午9点到下午3点，混乱猴子军团会随机杀生产实例，这个叫Chaos Monkey，还有增加延迟的Latency Monkey。</p>
+<p><img src="/images/20180523/more_monkey.png" alt="more monkey"></p>
+<p>还有Chaos Gorilla可以杀整个可用区(Availability Zone)，Chaos Kong杀整个Region。据说Netflix曾主动关闭一个可用区，客户没有任何影响。</p>
+<p>国内一些互联网公司也有演习和自攻一说，但基本都是提前打招呼的，规模一般也不大，Netflix是随机不打招呼玩真的。</p>
+<h3 id="九、几乎没有流程，没有员工手册"><a href="#九、几乎没有流程，没有员工手册" class="headerlink" title="九、几乎没有流程，没有员工手册"></a>九、几乎没有流程，没有员工手册</h3><p>Netflix是一家高度重视人才密度，重自由和责任文化，轻流程的公司。公司没有正式的员工手册，只有一条简单的指导原则：</p>
+<p>Act in Netflix’s best interest，以Netflix的最佳利益行事。</p>
+<p><img src="/images/20180523/culture.png" alt="culture"></p>
+<h3 id="十、No-CTO-No-Ops"><a href="#十、No-CTO-No-Ops" class="headerlink" title="十、No CTO, No Ops"></a>十、No CTO, No Ops</h3><p>Netflix的技术这么牛逼，但它是没有技术CTO职位的，只有首席产品CPO，工程团队和产品团队的VP都向CPO汇报。这样做更多是为了产品导向，便于技术和产品沟通合作，避免两边扯，避免业务驱动还是技术驱动的悖论，大家都是产品驱动。Netflix把它称为BusDevOps组织架构。</p>
+<p><img src="/images/20180523/org_arch.jpg" alt="organization architecture"></p>
+<p>Netflix也没有独立的运维团队(NoOps)，架构+中间件+运维+大数据闭环统称为云平台工程(Cloud and Platform Engineering)团队，一个VP总负责，更好地对接DevOps文化。Netflix的产品导向文化非常浓厚，连平台工程团队开源出来的产品都是整整齐齐的(见<a href="https://netflix.github.io/)，PaaS云平台是整个云平台工程团队最大的产品输出。" target="_blank" rel="noopener">https://netflix.github.io/)，PaaS云平台是整个云平台工程团队最大的产品输出。</a></p>
+<p><img src="/images/20180523/tech_org.png" alt="technical organization"></p>
+<p>Netflix的CTO其实是Chief Talent Officer，负责人才招聘的，公司对人才的重视可见一斑。</p>
+<p><img src="/images/20180523/cto.png" alt="cto"></p>
+<h3 id="十一、无论公司兴衰，始终支付市场最高工资"><a href="#十一、无论公司兴衰，始终支付市场最高工资" class="headerlink" title="十一、无论公司兴衰，始终支付市场最高工资"></a>十一、无论公司兴衰，始终支付市场最高工资</h3><p>不用多解释，这大概是Netflix最有霸气底气和牛逼的一点。据我在米国的同学讲，去Netflix基本是硅谷顶薪，博士毕业去给开了超过30万美金的年薪（这还是前几年的行情）。一般进去难，去了留下来也不容易，不胜任的被客客气气劝退的有。能留下来的一般也不跳，因为再跳也没有更高的待遇了。</p>
+<p><img src="/images/20180523/top_pay.png" alt="top pay"></p>
+<p>显然，没有顶级的人才密度，就无法支撑其高大上的技术架构和鹤立鸡群的文化。顶级的人才聚集在一起，容易碰撞迸发创新火花，捣腾出颠覆性的东西和理念。</p>
+<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>我在这边总结Netflix技术做的牛逼的事情，一方面是因为钦佩，但这不是重点，毕竟目前国内基础环境和人才密度是支撑不起这种类型文化的公司；但是，他山之石，可以攻玉，Netflix的很多技术、架构、组织和文化思路值得我们学习和借鉴。</p>
+<p>我本人没有在Netflix工作过，上面的信息主要通过互联网共享资料(特别是slideshare)学习解读(有些解读可能还是偏颇的)，所谓强者无秘密，Netflix的强大也体现在它无私分享精神，它在公司内部是信息公开透明分享的，对外部也一样，几乎所有Netflix微服务技术栈(也称NetflixOSS)你可以从github.com/netflix免费获得，其内部架构和技术相关资料基本上都可以通过slideshare或者Netflix techblog免费获得。在公开透明一块即使Google、Amazon和Apple这些互联网巨头都应该是自叹不如的。Netflix公司大概是地球上开出的一朵特别奇葩耀眼的花。</p>
+<p>向Netflix致敬!</p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/05/24/20180524/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    成长型组织如何突破技术困局
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/05/21/20180521/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">架构师必须知道的架构设计原则</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060702/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060702/zuul.png)" alt="微服务架构~BFF和网关是如何演化出来的" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060702/" class="title">微服务架构~BFF和网关是如何演化出来的</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T05:51:33.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060701/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060701/th.jpg)" alt="微服务架构~为什么要配置中心" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060701/" class="title">微服务架构~为什么要配置中心</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T03:23:10.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052902/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052902/service1.jpg)" alt="微服务2.0技术栈选型手册" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052902/" class="title">微服务2.0技术栈选型手册</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T03:00:26.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052901/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052901/building_blocks.jpg)" alt="架构之道~四种核心架构思维" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052901/" class="title">架构之道~四种核心架构思维</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T02:49:22.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/28/20180528/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/20180528/Features-5.png)" alt="架构之道~现代发布模式" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/28/20180528/" class="title">架构之道~现代发布模式</a></p>
+                            <p class="item-date"><time datetime="2018-05-28T08:33:31.000Z" itemprop="datePublished">2018-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术管理/">技术管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统架构/">系统架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/BFF/" style="font-size: 10px;">BFF</a> <a href="/tags/Netflix/" style="font-size: 10px;">Netflix</a> <a href="/tags/创建模式/" style="font-size: 10px;">创建模式</a> <a href="/tags/发布模式/" style="font-size: 10px;">发布模式</a> <a href="/tags/工程师成长/" style="font-size: 10px;">工程师成长</a> <a href="/tags/微服务/" style="font-size: 20px;">微服务</a> <a href="/tags/技术转型/" style="font-size: 10px;">技术转型</a> <a href="/tags/技术选型/" style="font-size: 16.67px;">技术选型</a> <a href="/tags/架构思维/" style="font-size: 10px;">架构思维</a> <a href="/tags/架构理念/" style="font-size: 10px;">架构理念</a> <a href="/tags/架构设计/" style="font-size: 10px;">架构设计</a> <a href="/tags/结构模式/" style="font-size: 10px;">结构模式</a> <a href="/tags/网关/" style="font-size: 10px;">网关</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/配置中心/" style="font-size: 10px;">配置中心</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 <i class="fa fa-heart"></i> 波波微课<br>
+            <span id="busuanzi_container_site_pv">访问量 <span id="busuanzi_value_site_pv" style="color:#49c8fb;font-size:16px;"></span> 次</span>&nbsp;
+            <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv" style="color:#49c8fb;font-size:16px;"></span> 人次</span>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+    <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = '{{ theme.comment.valine.guest_info }}';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'Bk7O038fcRfCk1WIcrhXopLO-9Nh9j0Va',
+        app_key: 'Otvliugzag188cyB1ojvmAB5',
+        placeholder: '',
+        avatar: '',
+        guest_info: GUEST,
+        pageSize: '10' || 10,
+    });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

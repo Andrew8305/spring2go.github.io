@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>中国式微服务技术栈2.0 | 波波微课</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言近年，Spring Cloud俨然已经成为微服务开发的主流技术栈，在国内开发者社区非常火爆。我近年一直在一线互联网公司（携程，拍拍贷等）开展微服务架构实践，根据我个人的一线实践经验和我平时对Spring Cloud的调研，我认为Spring Cloud技术栈中的有些组件离生产级开发尚有一定距离。比方说Spring Cloud Config和Spring Cloud Sleuth都是Pivota">
+<meta name="keywords" content="技术选型,微服务">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中国式微服务技术栈2.0">
+<meta property="og:url" content="http://yoursite.com/2018/05/27/20180527/index.html">
+<meta property="og:site_name" content="波波微课">
+<meta property="og:description" content="前言近年，Spring Cloud俨然已经成为微服务开发的主流技术栈，在国内开发者社区非常火爆。我近年一直在一线互联网公司（携程，拍拍贷等）开展微服务架构实践，根据我个人的一线实践经验和我平时对Spring Cloud的调研，我认为Spring Cloud技术栈中的有些组件离生产级开发尚有一定距离。比方说Spring Cloud Config和Spring Cloud Sleuth都是Pivota">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/20180527/microservices-sq.png">
+<meta property="og:updated_time" content="2018-06-15T12:18:24.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="中国式微服务技术栈2.0">
+<meta name="twitter:description" content="前言近年，Spring Cloud俨然已经成为微服务开发的主流技术栈，在国内开发者社区非常火爆。我近年一直在一线互联网公司（携程，拍拍贷等）开展微服务架构实践，根据我个人的一线实践经验和我平时对Spring Cloud的调研，我认为Spring Cloud技术栈中的有些组件离生产级开发尚有一定距离。比方说Spring Cloud Config和Spring Cloud Sleuth都是Pivota">
+<meta name="twitter:image" content="http://yoursite.com/images/20180527/microservices-sq.png">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="波波微课" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/leaf_32x32.png# path to favicon" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?a1339bc62c790c0cc12a7a8ef4ed8d50";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">波波微课</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/bobo.jpg" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/bobo.jpg" />
+            <h2 id="name">波波老师</h2>
+            <h3 id="title">资深架构师 &amp; 框架研发总监</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>中国 上海</span>
+            <!--<a id="follow" href="/">关注我</a>-->
+            <div id="follow" style="cursor:default;">扫描二维码关注我</div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                15
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/spring2go" target="_blank" title="github" class=tooltip>
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:yangbo@ppdai.com" target="_blank" title="email" class=tooltip>
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div style="text-align:center;padding:20px">
+            <img src="/images/qrcode.jpg" alt="公众号" style="width:100%;height:auto;">
+        </div>
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-20180527" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/20180527/microservices-sq.png" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            中国式微服务技术栈2.0
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/05/27/20180527/">
+            <time datetime="2018-05-27T08:19:22.000Z" itemprop="datePublished">2018-05-27</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/微服务架构/">微服务架构</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/微服务/">微服务</a>, <a class="tag-link" href="/tags/技术选型/">技术选型</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>近年，Spring Cloud俨然已经成为微服务开发的主流技术栈，在国内开发者社区非常火爆。我近年一直在一线互联网公司（携程，拍拍贷等）开展微服务架构实践，根据我个人的一线实践经验和我平时对Spring Cloud的调研，我认为Spring Cloud技术栈中的有些组件离生产级开发尚有一定距离。比方说Spring Cloud Config和Spring Cloud Sleuth都是Pivotal自研产品，尚未得到大规模企业级生产应用，很多企业级特性缺失（具体见我后文描述）。另外Spring Cloud体系还缺失一些关键的微服务基础组件，比如Metrics监控，健康检查和告警等。所以我在参考Spring Cloud微服务技术栈的基础上，结合自身的实战落地经验，也结合国内外一线互联网公司（例如Netflix，点评，携程，Zalando等）的开源实践，综合提出更贴近国内技术文化特色的轻量级的微服务参考技术栈。希望这个参考技术栈对一线的架构师（或者是初创公司）有一个好的指导，能够少走弯路，快速落地微服务架构。</p>
+<a id="more"></a>
+<p>这个参考技术栈和总体架构如下图所示：</p>
+<p><img src="/images/20180527/msa_tech_stack.png" alt="msa tech stack"></p>
+<p>中国式微服务技术栈1.0</p>
+<p>主要包含11大核心组件，分别是：</p>
+<p><strong>核心支撑组件:</strong></p>
+<ol>
+<li>服务网关Zuul</li>
+<li>服务注册发现Eureka+Ribbon</li>
+<li>服务配置中心Apollo</li>
+<li>认证授权中心Spring Security OAuth2</li>
+<li>服务框架Spring MVC/Boot</li>
+</ol>
+<p><strong>监控反馈组件:</strong></p>
+<ol>
+<li>数据总线Kafka</li>
+<li>日志监控ELK</li>
+<li>调用链监控CAT</li>
+<li>Metrics监控KairosDB</li>
+<li>健康检查和告警ZMon</li>
+<li>限流熔断和流聚合Hystrix/Turbine</li>
+</ol>
+<h3 id="一、核心支撑组件"><a href="#一、核心支撑组件" class="headerlink" title="一、核心支撑组件"></a>一、核心支撑组件</h3><h4 id="1-1-服务网关Zuul"><a href="#1-1-服务网关Zuul" class="headerlink" title="1.1 服务网关Zuul"></a>1.1 服务网关Zuul</h4><p>2013年左右，infoq曾经对前Netflix架构总监Adrian Cockcroft有过一次专访[附录1]，其中有问Adrian：“Netflix开源这么多项目，你认为哪一个是最不可或缺的(MOST Indispensable)”，Adrian回答说：“在NetflixOSS开源项目中，有一个容易被忽略，但是Netflix最强大的基础服务之一，它就是Zuul网关服务。Zuul网关主要用于智能路由，同时也支持认证，区域和内容感知路由，将多个底层服务聚合成统一的对外API。Zuul网关的一大亮点是动态可编程，配置可以秒级生效”。从Adrian的回答中，我们可以感受到Zuul网关对微服务基础架构的重要性。</p>
+<p><img src="/images/20180527/zuul.png" alt="zuul"></p>
+<p>Zuul在英文中是一种怪兽，星际争霸中虫族里头也有Zuul，Netflix为网关起名Zuul，寓意看门神兽</p>
+<p>Zuul网关在Netflix经过生产级验证，在纳入Spring Cloud体系之后，在社区中也有众多成功的应用。Zuul网关在携程（日流量超50亿），拍拍贷等公司也有成功的落地实践，是微服务基础架构中网关一块的首选。其它开源产品像Kong或者Nginx等也可以改造支持网关功能，但是较复杂门槛高一点。</p>
+<p>Zuul网关虽然不完全支持异步，但是同步模型反而使它简单轻量，易于编程和扩展，当然同步模型需要做好限流熔断（和限流熔断组件Hystrix配合），否则可能造成资源耗尽甚至雪崩效应（cascading failure）。</p>
+<h4 id="1-2-服务注册发现Eureka-Ribbon"><a href="#1-2-服务注册发现Eureka-Ribbon" class="headerlink" title="1.2 服务注册发现Eureka + Ribbon"></a>1.2 服务注册发现Eureka + Ribbon</h4><p>针对微服务注册发现场景，社区里头的开源产品当中，经过生产级大流量验证的，目前只有Netflix Eureka一个，它也已经纳入Spring Cloud体系，在社区中有众多成功应用，例如携程Apollo配置中心也是使用Eureka做软负载。其它产品如Zookeeper/Etcd/Consul等，都是比较通用的产品，还需要进一步封装定制才可生产级使用。Eureka支持跨数据中心高可用，但它是AP最终一致系统，不是强一致性系统。</p>
+<p><img src="/images/20180527/eureka.jpg" alt="eureka"></p>
+<p>Eureka是阿基米德洗澡时发现浮力原理时发出的惊叹声，在微服务中寓意发现</p>
+<p>Ribbon是可以和Eureka配套对接的客户端软负载库，在Eureka的配合下能够支持多种灵活的动态路由和负载均衡策略。内部微服务直连可以直接走Ribbon客户端软负载，网关上也可以部署Ribbon，这时网关相当于一个具有路由和软负载能力的超级客户端。</p>
+<p><img src="/images/20180527/ribbon.png" alt="ribbon"></p>
+<p>Ribbon是蝴蝶结的意思</p>
+<h4 id="1-3-服务配置中心Apollo"><a href="#1-3-服务配置中心Apollo" class="headerlink" title="1.3 服务配置中心Apollo"></a>1.3 服务配置中心Apollo</h4><p>Spring Cloud体系里头有个Spring Cloud Config产品，但是功能远远达不到生产级，只能小规模场景下用，中大规模企业级场景不建议采用。携程框架研发部开源的Apollo是一款在携程和其它众多互联网公司生产落地下来的产品，开源两年多，目前在github上有超过4k星，非常成功，文档齐全也是它的一大亮点，推荐作为企业级的配置中心产品。Apollo支持完善的管理界面，支持多环境，配置变更实时生效，权限和配置审计等多种生产级功能。Apollo既可以用于连接字符串等常规配置场景，也可用于发布开关（Feature Flag）和业务配置等高级场景。在《2018波波的微服务基础架构和实践》课程中，第二个模块就配置中心相关主题，会深度剖析携程Apollo的架构和实践，预计6月份推出，欢迎大家关注学习。</p>
+<p><img src="/images/20180527/apollo.png" alt="apollo"></p>
+<p>阿波罗是希腊神话中太阳神的意思</p>
+<h4 id="1-4-认证授权中心Spring-Security-OAuth2"><a href="#1-4-认证授权中心Spring-Security-OAuth2" class="headerlink" title="1.4 认证授权中心Spring Security OAuth2"></a>1.4 认证授权中心Spring Security OAuth2</h4><p>目前开源社区还没有特别成熟的微服务安全认证中心产品，之前我工作过的一些中大型互联网公司，比如携程，唯品会等，在这一块基本都是定制自研的，但是对一般企业来说，定制自研还是有门槛的。OAuth2是一种基于令牌Token的授权框架，已经得到众多大厂（Google, Facebook, Twitter, Microsoft等）的支持，可以认为是事实上的微服务安全协议标准，适用于开放平台联合登录，现代微服务安全（包括单页浏览器App/无线原生App/服务器端WebApp接入微服务，以及微服务之间调用等场景），和企业内部应用认证授权(IAM/SSO)等多种场景。</p>
+<p>Spring Security OAuth2是Spring Security基础上的一个扩展，支持四种主要的OAuth2 Flows，基本可以作为微服务认证授权中心的推荐产品。但是Spring Security OAuth2还只是一个框架，不是一个端到端的开箱即用的产品，企业级应用仍需在其上进行定制，例如提供Web端管理界面，对接企业内部的用户认证登录系统，使用Cache缓存令牌，和微服务网关对接等，才能作为生产级使用。在波波在极客时间的《微服务架构实践160讲》课程中，第一个模块就是微服务安全架构和实践相关主题，会深度剖析OAuth2原理和Spring Security OAuth2实践，欢迎大家关注学习。</p>
+<p><img src="/images/20180527/spring_security_oauth2.png" alt="spring security oauth2"></p>
+<p>Spring Security OAuth2是Spring Security框架的一个扩展</p>
+<h4 id="1-5-服务框架Spring-Boot"><a href="#1-5-服务框架Spring-Boot" class="headerlink" title="1.5 服务框架Spring Boot"></a>1.5 服务框架Spring Boot</h4><p>Spring可以说是史上最成功的Web App/API开发框架之一，它融入了Java社区中多年来沉淀下来的最佳实践，虽然有将近15年历史，但目前的社区活跃度仍呈上升趋势。Spring Boot在Spring的基础上进一步打包封装，提供更贴心的Starter工程，自启动能力，自动依赖管理，基于代码的配置等特性进一步降低接入门槛。另外Spring Boot也提供actuator这样的生产级监控特性，支持DevOps研发模式，它是微服务开发框架的推荐首选。</p>
+<p>REST契约规范Swagger和Spring有比较好的集成，使得Spring也支持契约驱动开发(Contract Driven Development)模型。对于一些中大规模的企业，如果业务复杂团队较多，考虑到互操作性和集成成本，建议采用契约驱动开发模型，也就是开发时先定义Swagger契约，然后再通过契约生成服务端接口和客户端，再实现服务端业务逻辑，这种开发模型能够标准化接口，降低系统间集成成本，对于多团队协同并行开发非常重要。</p>
+<p><img src="/images/20180527/spring_boot_logo.jpg" alt="spring boot logo"></p>
+<p>Spring Boot Logo</p>
+<h3 id="二、监控反馈组件"><a href="#二、监控反馈组件" class="headerlink" title="二、监控反馈组件"></a>二、监控反馈组件</h3><h4 id="2-1-数据总线Kafka"><a href="#2-1-数据总线Kafka" class="headerlink" title="2.1 数据总线Kafka"></a>2.1 数据总线Kafka</h4><p>最初由Linkedin研发并在其内部大规模成功应用，然后在Apache上开源的Kafka，是业内数据总线(Databus)一块的标配，几乎每一家互联网公司都可以看到Kafka的身影。Kafka堪称开源项目的一个经典成功案例，其创始人团队从Linkedin离职后还专门成立了一家叫confluent的企业软件服务公司，围绕Kafka周边提供配套和增值服务。在监控一块，日志和Metrics等数据可以通过Kafka做收集、存储和转发，相当于中间增加了一个大容量缓冲，能够应对海量日志数据的场景。除了日志监控数据收集，Kafka在业务大数据分析，IoT等场景都有广泛应用。如果对Kafka进行适当定制增强，还可以用于传统消息中间件场景。</p>
+<p>Kafka的特性是大容量，高吞吐，高可用，数据可重复消费，可水平扩展，支持消费者组等。Kafka尤其适用于不严格要求实时和不丢数据的大数据日志场景。</p>
+<p><img src="/images/20180527/kafka_founders.jpg" alt="kafka founders"></p>
+<p>Kafka创始人三人组，离开Linkedin后，创立了基于Kafka的创业公司Confluent</p>
+<h4 id="2-2-日志监控ELK"><a href="#2-2-日志监控ELK" class="headerlink" title="2.2 日志监控ELK"></a>2.2 日志监控ELK</h4><p>ELK（ElasticSearch/Logstash/Kibana）是日志监控一块的标配技术栈，几乎每一家互联网公司都可以看到ELK的身影，据称携程是国内ELK的最大用户，每日增量日志数据量达到80~90TB。ELK已经非常成熟，基本上是开箱即用，后续主要的工作在运维、治理和调优。ELK一般和Kafka配套使用，因为日志分词操作还是比较耗时的，Kafka主要作为前置缓冲，起到流量消峰作用，抵消日志流量高峰和消费（分词建索引）的不匹配问题。一旦反向索引建立，日志检索是非常快的，所以日志检索快和灵活是ElasticSearch的最大亮点。另外ELK还有大容量，高吞吐，高可用，可水平扩容等企业级特性。</p>
+<p>创业公司起步期，考虑到资源时间限制，调用链监控和Metrics监控可以不是第一优先级，但是ELK是必须搭一套的，应用日志数据一定要收集并建立索引，基本能够覆盖大部分Trouble Shooting场景（业务，性能，程序bug等）。另外用好ELK的关键是治理，需要制定一些规则（比如只收集Warn级别以上日志），对应用的日志数据量做好监控，否则开发人员会滥用，什么垃圾数据都往ELK里头丢，造成大量空间被浪费，严重的还可能造成性能可用性问题。</p>
+<p><img src="/images/20180527/elk_kafka_deployment.png" alt="elk kafka deployment"></p>
+<p>ELK + Kafka参考部署架构</p>
+<h4 id="2-3-调用链监控CAT"><a href="#2-3-调用链监控CAT" class="headerlink" title="2.3 调用链监控CAT"></a>2.3 调用链监控CAT</h4><p>Spring Cloud支持基于Zipkin的调用链监控，我个人基于实践经验认为Zipkin还不能算一款企业级调用链监控产品，充其量只能算是一个半成品，很多重要的企业级特性缺失。Zipkin最早是由Twitter在消化Google Dapper论文的基础上研发，在Twitter内部有较成功应用，但是在开源出来的时候把不少重要的统计报表功能给阉割了（因为依赖于一些比较重的大数据分析平台），只是开源了一个半成品，能简单查询和呈现可视化调用链，但是细粒度的调用性能数据报表没有开源。</p>
+<p>Google大致在2007年左右开始研发称为Dapper的调用链监控系统，但在远远早于这个时间（大致在2002左右），eBay就已经有了自己的调用链监控系统CAL（Centralized Application Logging），Google和eBay的设计思路大致相同，但是也有一些差别。CAL在eBay有大规模成功应用，被称为是eBay的四大神器之一（另外三个是DAL，Messaging和SOA）。开源调用链监控系统CAT的作者吴其敏（我曾经和他同事，习惯叫他老吴），曾经在eBay工作近十年，期间深入消化吸收了CAL的设计。2011年后老吴离开eBay去了点评，用三年时间在点评再造了一款调用链监控产品CAT（Centralized Application Tracking），CAT具有CAL的基因和影子，同时也融入了老吴在点评的探索实践和创新。</p>
+<p>CAT是一款更完整的企业级调用链监控产品，甚至已经接近一个APM（Application Performance Management）产品的范畴，它不仅支持调用链的查询和可视化，还支持细粒度的调用性能数据统计报表，这块是CAT和市面上其它开源调用链监控产品最本质的差异点，实际上开发人员大部分时间用CAT是看性能统计报表（主要是CAT的Transaction和Problem报表），这些报表相当于给了开发人员一把尺子，可以自助测量并持续改进应用性能。另外CAT还支持应用报错大盘，自助告警等功能，也是企业级监控非常实用的功能。</p>
+<p>CAT在点评，携程，陆金所，拍拍贷等公司有成功落地案例，因为是国产调用链监控产品，界面展示和功能等更契合国内文化，更易于在国内公司落地。个人推荐CAT作为微服务调用链监控的首选。至于社区里头有人提到CAT的侵入性问题，我觉得是要一分为二看，有利有弊，有耦合性但是性能更好，一般企业中基础架构团队会使用CAT统一为基础组件埋点，开发人员一般不用自己埋点；另外企业用了一款调用链监控产品以后，一般是不会换的，开发人员用习惯就好了，侵入不是大问题。</p>
+<p><img src="/images/20180527/cat_transaction.png" alt="cat transaction"></p>
+<p>cAT的Transaction报表</p>
+<h4 id="2-4-Metrics监控KairosDB"><a href="#2-4-Metrics监控KairosDB" class="headerlink" title="2.4 Metrics监控KairosDB"></a>2.4 Metrics监控KairosDB</h4><p>除了日志和调用链，Metrics也是应用监控的重要关注点。互联网应用提倡度量驱动开发（Metrics Driven Development），也就是说开发人员不仅要关注功能实现，做好单元测试（TDD），还要做好业务层（例如注册，登录和下单数等）和应用层（例如调用数，调用延迟等）的监控埋点，这个也是DevOps（开发即运维）理念的体现，DevOps要求开发人员必须关注运维需求，监控埋点是一种生产级运维需求。</p>
+<p>Metrics监控产品底层依赖于时间序列数据库（TSDB），最近比较热的开源产品有Prometheus和InfluxDB，社区用户数量和反馈都不错，可以采纳。但是这些产品分布式能力比较弱，定制扩展门槛比较高，一般建议刚起步量不大的公司采用。如果企业业务和团队规模发展到一定阶段，建议考虑支持分布式能力的时间序列监控产品，例如KairosDB或者OpenTSDB，我本人对这两款产品都有一些实践经验，KariosDB基于Cassandra，相对更轻量一点，建议中大规模公司采用，如果你们公司已经采用Hadoop/HBase，则OpenTSDB也是不错选择。</p>
+<p>KairosDB一般也和Kafka配套使用，Kafka作为前置缓冲。另外注意使用KariosDB打点的话tag的值不能太离散，否则会有查询性能问题，这个和KariosDB底层存储结构有关系。Grafana是Metrics展示标配，可以和KariosDB无缝集成。</p>
+<p><img src="/images/20180527/grafana.png" alt="grafana"></p>
+<p>Grafana是Metrics展示标配，和主流时间序列数据库都可以集成</p>
+<h4 id="2-5-健康检查和告警ZMon"><a href="#2-5-健康检查和告警ZMon" class="headerlink" title="2.5 健康检查和告警ZMon"></a>2.5 健康检查和告警ZMon</h4><p>除了上述监控手段，我们仍需要健康检查和告警系统作为配套的监控手段。ZMon是德国电商公司Zalando开源的一款健康检查和告警平台，具备强大灵活的监控告警能力。ZMon本质上可以认为是一套分布式监控任务调度平台，它提供众多的Check脚本（也可以自己再定制扩展），能够对各种硬件资源或者目标服务（例如HTTP端口，Spring的Actuator端点，KariosDB中的Metrics，ELK中的错误日志等等）进行定期的健康检查和告警，它的告警逻辑和策略采用Python脚本实现，开发人员可以实现自助式告警。ZMon同时适用于系统，应用，业务，甚至端用户体验层的监控和告警。</p>
+<p><img src="/images/20180527/zmon_architecture.png" alt="zmon architecture"></p>
+<p>ZMon分布式监控告警系统架构，底层基于KairosDB时间序列数据库</p>
+<h4 id="2-6-限流熔断和流聚合Hystrix-Turbine"><a href="#2-6-限流熔断和流聚合Hystrix-Turbine" class="headerlink" title="2.6 限流熔断和流聚合Hystrix+Turbine"></a>2.6 限流熔断和流聚合Hystrix+Turbine</h4><p>2010年左右，Netflix也饱受分布式微服务系统中雪崩效应（Cascading Failure）的困扰，于是专门启动了一个叫做弹性工程的项目来解决这个问题，Hystrix就是弹性工程最终落地下来的一个产品。Hystrix在Netflix微服务系统中大规模推广应用后，雪崩效应问题基本得到解决，整个体统更具弹性。之后Netflix把Hystrix开源贡献给了社区，短期获得社区的大量正面反馈，目前Hystrix在github上有超过1.3万颗星，据说支持奥巴马总统选举的系统也曾使用Hystrix进行限流熔断保护[参考附录2]，可见限流熔断是分布式系统稳定性的强需求，Netflix很好的抓住了这个需求并给出了经过生产级验证的解决方案。Hystrix已经被纳入Spring Cloud体系，它是Java社区中限流熔断组件的首选（目前还看不到第二个更好的产品）。</p>
+<p>Turbine是和Hystrix配套的一个流聚合服务，能够对Hystrix监控数据流进行聚合，聚合以后可以在Hystrix Dashboard上看到集群的流量和性能情况。</p>
+<p><img src="/images/20180527/hystrix.png" alt="hystrix"></p>
+<p>Hystrix在英文中是豪猪兽的意思，豪猪兽通过身上的刺保护自己，Netflix为限流熔断组件起名Hystrix，寓意Hystrix能够保护微服务调用。</p>
+<h3 id="三、结论"><a href="#三、结论" class="headerlink" title="三、结论"></a>三、结论</h3><ol>
+<li>技术栈没有好坏之分，只有适合一说。本文推荐的技术栈主要基于我个人的实践和总结，但是未必适合所有场景，毕竟每个企业的上下文各不相同。作为架构师你可以参考我推荐的技术栈，但不可拘泥照搬，你必须在深入理解分布系统原理的基础上，再结合企业实际场景灵活应用。</li>
+<li>本文推荐的技术栈主要面向微服务基础架构，也是波波在极客时间上的《微服务架构实践160讲》课程要深度剖析的主题。在整个互联网基础技术平台体系中，还有消息，任务，数据访问层，发布系统，容器云平台，分布式事务，分布式一致性，测试，CI/CD等其它重要主题，这些是波波在2019第三季和2020第四季在极客时间上要陆续推出的内容，请大家持续关注。</li>
+<li>2018年波波在极客时间上的课程《微服务架构实践160讲》约有8个模块化课程组成，每个模块专注剖析微服务基础架构的一个核心组件，技术人员可以在碎片化时间自由学习，快速掌握微服务核心组件的问题域、架构原理和开发运维实践。对开发人员和架构师的个人能力提升和职业发展收益主要包括：<ul>
+<li>对主流微服务技术栈的组件及其架构有较全面深入的理解，</li>
+<li>对微服务基础架构有体系化认识，</li>
+<li>能够根据企业场景设计和搭建微服务基础架构，</li>
+<li>中高级程序员可以向架构师行列迈进，</li>
+<li>现有架构师可以充实和拓展基础架构知识和技能体系。</li>
+</ul>
+</li>
+</ol>
+<h3 id="四、附录"><a href="#四、附录" class="headerlink" title="四、附录"></a>四、附录</h3><ol>
+<li><p><a href="https://www.infoq.com/articles/cockcroft-high-availability" target="_blank" rel="noopener">Interview: Adrian Cockcroft on High Availability, Best Practices, and Lessons Learned in the Cloud</a></p>
+</li>
+<li><p><a href="http://it.sohu.com/20121129/n358943361.shtml" target="_blank" rel="noopener">Netflix云端开源工具Hystrix：曾助奥巴马竞选</a></p>
+</li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/05/28/20180528/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    架构之道~现代发布模式
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/05/25/20180525/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">波波的技术选型哲学</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060702/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060702/zuul.png)" alt="微服务架构~BFF和网关是如何演化出来的" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060702/" class="title">微服务架构~BFF和网关是如何演化出来的</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T05:51:33.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060701/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060701/th.jpg)" alt="微服务架构~为什么要配置中心" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060701/" class="title">微服务架构~为什么要配置中心</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T03:23:10.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052902/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052902/service1.jpg)" alt="微服务2.0技术栈选型手册" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052902/" class="title">微服务2.0技术栈选型手册</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T03:00:26.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052901/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052901/building_blocks.jpg)" alt="架构之道~四种核心架构思维" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052901/" class="title">架构之道~四种核心架构思维</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T02:49:22.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/28/20180528/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/20180528/Features-5.png)" alt="架构之道~现代发布模式" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/28/20180528/" class="title">架构之道~现代发布模式</a></p>
+                            <p class="item-date"><time datetime="2018-05-28T08:33:31.000Z" itemprop="datePublished">2018-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术管理/">技术管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统架构/">系统架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/BFF/" style="font-size: 10px;">BFF</a> <a href="/tags/Netflix/" style="font-size: 10px;">Netflix</a> <a href="/tags/创建模式/" style="font-size: 10px;">创建模式</a> <a href="/tags/发布模式/" style="font-size: 10px;">发布模式</a> <a href="/tags/工程师成长/" style="font-size: 10px;">工程师成长</a> <a href="/tags/微服务/" style="font-size: 20px;">微服务</a> <a href="/tags/技术转型/" style="font-size: 10px;">技术转型</a> <a href="/tags/技术选型/" style="font-size: 16.67px;">技术选型</a> <a href="/tags/架构思维/" style="font-size: 10px;">架构思维</a> <a href="/tags/架构理念/" style="font-size: 10px;">架构理念</a> <a href="/tags/架构设计/" style="font-size: 10px;">架构设计</a> <a href="/tags/结构模式/" style="font-size: 10px;">结构模式</a> <a href="/tags/网关/" style="font-size: 10px;">网关</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/配置中心/" style="font-size: 10px;">配置中心</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 <i class="fa fa-heart"></i> 波波微课<br>
+            <span id="busuanzi_container_site_pv">访问量 <span id="busuanzi_value_site_pv" style="color:#49c8fb;font-size:16px;"></span> 次</span>&nbsp;
+            <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv" style="color:#49c8fb;font-size:16px;"></span> 人次</span>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+    <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = '{{ theme.comment.valine.guest_info }}';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'Bk7O038fcRfCk1WIcrhXopLO-9Nh9j0Va',
+        app_key: 'Otvliugzag188cyB1ojvmAB5',
+        placeholder: '',
+        avatar: '',
+        guest_info: GUEST,
+        pageSize: '10' || 10,
+    });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

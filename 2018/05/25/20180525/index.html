@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>波波的技术选型哲学 | 波波微课</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言技术选型是一个很热门的话题，最近我看到自己的微信朋友圈有好几篇关于技术选型的文章，读者对这类主题的热情很高。在技术组织内部，技术人员经常会面临技术选型问题，有时候，技术选型还常常牵扯好几波干系人，相互之间还会产生争议，有的甚至还可能发展到派系斗争的地步。即便像我自己，已经有十几年研发和架构经验的老司机，不管是工作还是业余，有很大部分时间的思考都是深陷在A技术和B技术的利弊权衡之中，不能自拔。无">
+<meta name="keywords" content="技术选型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="波波的技术选型哲学">
+<meta property="og:url" content="http://yoursite.com/2018/05/25/20180525/index.html">
+<meta property="og:site_name" content="波波微课">
+<meta property="og:description" content="前言技术选型是一个很热门的话题，最近我看到自己的微信朋友圈有好几篇关于技术选型的文章，读者对这类主题的热情很高。在技术组织内部，技术人员经常会面临技术选型问题，有时候，技术选型还常常牵扯好几波干系人，相互之间还会产生争议，有的甚至还可能发展到派系斗争的地步。即便像我自己，已经有十几年研发和架构经验的老司机，不管是工作还是业余，有很大部分时间的思考都是深陷在A技术和B技术的利弊权衡之中，不能自拔。无">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/20180525/Philosophy%20combined%20course%20page%20new%20image.jpg">
+<meta property="og:updated_time" content="2018-06-15T12:21:20.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="波波的技术选型哲学">
+<meta name="twitter:description" content="前言技术选型是一个很热门的话题，最近我看到自己的微信朋友圈有好几篇关于技术选型的文章，读者对这类主题的热情很高。在技术组织内部，技术人员经常会面临技术选型问题，有时候，技术选型还常常牵扯好几波干系人，相互之间还会产生争议，有的甚至还可能发展到派系斗争的地步。即便像我自己，已经有十几年研发和架构经验的老司机，不管是工作还是业余，有很大部分时间的思考都是深陷在A技术和B技术的利弊权衡之中，不能自拔。无">
+<meta name="twitter:image" content="http://yoursite.com/images/20180525/Philosophy%20combined%20course%20page%20new%20image.jpg">
+    
+
+    
+        <link rel="alternate" href="/atom.xml" title="波波微课" type="application/atom+xml" />
+    
+
+    
+        <link rel="icon" href="/images/leaf_32x32.png# path to favicon" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fontawesome.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-brands.min.css">
+    <link rel="stylesheet" href="/libs/font-awesome5/css/fa-solid.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+        <script>
+var _hmt = _hmt || [];
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?a1339bc62c790c0cc12a7a8ef4ed8d50";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">波波微课</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/archives">归档</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/images/bobo.jpg" />
+                            <i class="fas fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fas fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">归档</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile" class="profile-fixed">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/images/bobo.jpg" />
+            <h2 id="name">波波老师</h2>
+            <h3 id="title">资深架构师 &amp; 框架研发总监</h3>
+            <span id="location"><i class="fas fa-map-marker-alt" style="padding-right: 5px"></i>中国 上海</span>
+            <!--<a id="follow" href="/">关注我</a>-->
+            <div id="follow" style="cursor:default;">扫描二维码关注我</div>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                15
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="https://github.com/spring2go" target="_blank" title="github" class=tooltip>
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:yangbo@ppdai.com" target="_blank" title="email" class=tooltip>
+                            <i class="fa fa-envelope"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/atom.xml" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+        
+        <div style="text-align:center;padding:20px">
+            <img src="/images/qrcode.jpg" alt="公众号" style="width:100%;height:auto;">
+        </div>
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-20180525" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+            
+	
+		<img src="/images/20180525/Philosophy combined course page new image.jpg" class="article-banner" />
+	
+
+
+
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            波波的技术选型哲学
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fas fa-calendar-alt"></i>
+        <a href="/2018/05/25/20180525/">
+            <time datetime="2018-05-25T03:24:35.000Z" itemprop="datePublished">2018-05-25</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fas fa-folder"></i>
+        <a class="article-category-link" href="/categories/技术管理/">技术管理</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link" href="/tags/技术选型/">技术选型</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>技术选型是一个很热门的话题，最近我看到自己的微信朋友圈有好几篇关于技术选型的文章，读者对这类主题的热情很高。在技术组织内部，技术人员经常会面临技术选型问题，有时候，技术选型还常常牵扯好几波干系人，相互之间还会产生争议，有的甚至还可能发展到派系斗争的地步。即便像我自己，已经有十几年研发和架构经验的老司机，不管是工作还是业余，有很大部分时间的思考都是深陷在A技术和B技术的利弊权衡之中，不能自拔。无论如何，技术选型说小了关乎项目和团队成败，说大了关乎企业业务的发展，不可小觑。</p>
+<p>本文所表达的技术选型理念应该是具体技术无关的，但是由于我个人的背景更偏向互联网后端的研发和架构，所以本文的视角更偏向后端技术的选型。</p>
+<a id="more"></a>
+<h3 id="一、软件的本质复杂性"><a href="#一、软件的本质复杂性" class="headerlink" title="一、软件的本质复杂性"></a>一、软件的本质复杂性</h3><p>近年，云计算、微服务、容器和DevOps等新技术和理念层出不穷，技术人员对各种新技术的追捧热情也空前高涨，各种新技术微信讨论群也如雨后春笋般冒了出来。这是一个好现象，说明我们的开发人员多了，技术环境也日趋成熟，有点百花齐放的感觉。同时也让我有一点担忧，我担忧的是纯技术和工具论的抬头，也就是太过专注技术，认为技术可以搞定一切，反而忽略了软件研发的本质复杂性。回想当年，自己也曾是这样的技术狂热分子，EJB刚出来的时候，我为EJB摇旗呐喊，Spring出来的时候，我也曾一度是该技术的死忠，简单认为这些技术是银弹可以帮助解决所有的复杂性问题。</p>
+<p>1986年，人月神话的作者Brooks就提出，软件的本质复杂性（Essential Complexity）存在于复杂的业务领域中（用技术的话讲是业务领域建模复杂性），技术仅是辅助工具，它解决的问题是帮助将业务领域问题映射转换成软件实现，只解决次要复杂性（Accidental Complexity）。作者同时指出，由于软件本质的复杂性，真正的银弹并不存在；也断言在十年内，没有任何一项技术或者方法可使软件工程的生产力提高一个数量级。30年前作者提出的论断，今天依然闪烁智慧的光芒。人月神话已经出了40周年纪念版了，堪称软件工程的圣经，建议所有从事软工行业的朋友学习。除了业务和技术，我还想强调软件的本质复杂性同时隐含在企业的人、组织、流程和管理中，不容忽视。</p>
+<p>架构师只有深刻理解软件的本质复杂性，才能站在解决实际业务问题的角度，更好的做出技术选型，否则易陷入唯技术工具论的陷阱。</p>
+<p><img src="/images/20180525/mythical_man_month.jpg" alt="mythical man month"></p>
+<h3 id="二、使用成熟的技术"><a href="#二、使用成熟的技术" class="headerlink" title="二、使用成熟的技术"></a>二、使用成熟的技术</h3><p>大部分公司都是商业组织，不是科研机构或者纯软件研发机构。商业组织使用技术是为了解决当下的业务问题，他们更应该使用成熟稳定的技术。</p>
+<p>如下图，技术的使用有明显的生命周期，早期有创新者和早期使用者采用，我把这个阶段称为试水趟坑期，也就是说这个阶段技术不是很成熟稳定的，虽然尝新者可能占据一定的技术领先优势，但是他们常常需要以踩坑填坑作为代价；如果这项技术经过早期验证则会跨越鸿沟进入早期大众阶段，这个阶段技术会逐渐走向成熟，处于上升期，坑逐渐被填平，技术被大众所采纳；之后技术缓慢经过末期大众阶段，最终走向滞后期，一直到生命周期的结束退出历史舞台。</p>
+<p><img src="/images/20180525/tech_adoption.jpg" alt="technology adoption life cycle"></p>
+<p>技术选型的一大智慧是不要盲目追求新技术，老老实实采用成熟稳定的技术，让那些喜欢追新的人去踩坑😊，等这项技术跨越鸿沟，进入早期大众阶段，你再择机投入，这样最保险和高效。当然作为技术人员，对新技术保持敏锐，提前预研是完全OK的，但是投入生产的话还是成熟稳定第一。</p>
+<h3 id="三、少即是多"><a href="#三、少即是多" class="headerlink" title="三、少即是多"></a>三、少即是多</h3><p>一项新技术既有学习成本，又有维护（定制、监控、管理和运维）成本，新技术引入很容易，学好用好运维好却很难。一个不严格把控技术栈数量的公司，开发人员常常会各自为政，随意引入新技术，造成技术栈散乱，学习和维护成本高，技术栈知识无法共享，技术体系无法建立等问题，严重的会极大影响研发效率和业务规模化能力。</p>
+<p>以我本人专注的后端基础框架领域为例，技术栈散乱还会直接影响系统稳定性，因为技术组件和工具太多，无法统一埋点和建立完善的监控体系。当业务量发展到一定规模，技术栈散乱还会给系统扩容跨机房迁移等带来巨大障碍。</p>
+<p>在一些成熟的互联网公司，比如国内的阿里，国外的Netflix和eBay等公司，这些公司虽然财力和资源丰富，但是他们的核心技术栈（比如主流开发语言，框架和数据存储等）的数量同样是受到严格把控的。</p>
+<p>新技术引入的基本原则就是少即是多，能不引入新技术尽量不要引入新技术，确实需要引入的话，也要有相应的新技术引入管理流程（一般由公司的技术或者架构委员会制定和把控）。</p>
+<h3 id="四、技术的先决条件"><a href="#四、技术的先决条件" class="headerlink" title="四、技术的先决条件"></a>四、技术的先决条件</h3><p>技术引入常常是有一些先决条件的，比方说最近比较热的微服务架构，按照马丁福勒的说法，微服务有如下先决条件：</p>
+<ul>
+<li>快速的环境提供能力（Provisioning）能力（通常指IAAS层能力），</li>
+<li>基本的监控能力</li>
+<li>快速的发布能力</li>
+<li>初步的DevOps文化</li>
+</ul>
+<p>马丁特别指出“你必须长足够高才能考虑微服务”，在这些先决条件没有满足之前，直接推行微服务会面临巨大落地挑战。</p>
+<p><img src="/images/20180525/tech_prerequisite.jpg" alt="tech prerequisite"></p>
+<p>同样，容器技术的引入对应用也是有要求的（参考[<a href="#appendix">附录17.1</a>] ~ 12 Factor App），而DevOps研发模式的引入不仅对基础技术和架构，研发人员技能，甚至组织架构和企业文化都是有很高要求的，在没有满足先决条件前，这些新技术或研发模式都会面临巨大的落地挑战。</p>
+<p>作为管理者或者架构师，在引入一项新技术之前，要充分调研了解新技术的先决条件，不能盲目引入。对于确实需要引入但是目前还不满足先决条件的，需要做好阶段性规划，先打好基础，再适时引入新技术。</p>
+<h3 id="五、来自大公司的技术"><a href="#五、来自大公司的技术" class="headerlink" title="五、来自大公司的技术"></a>五、来自大公司的技术</h3><p>大公司采用的技术，未必适合中小公司。大公司有足够的资源、人力和时间，可以投入一些前沿和重量级的技术（在BAT级别公司，为重量级技术投入几十甚至百人以上的研发团队是很正常的事），但是中小公司资源有限，不能盲目跟风，应该选择和自己发展阶段相适应的技术，否则不仅不能帮助业务发展，反而会给业务发展带来阻碍。</p>
+<h3 id="六、技术的文化特性"><a href="#六、技术的文化特性" class="headerlink" title="六、技术的文化特性"></a>六、技术的文化特性</h3><p>技术常常带有文化特性的，在国外流行的技术，在国内未必流行。一个例子是如Scala这样的函数式语言，Scala在国外互联网公司是有一定流行度的（Twitter、Linkedin等），国内虽然有不少簇拥者，但是始终只是小众，无法流行，究其原因，国外很多大学教授的第一门编程语言是采用函数式语言的（例如美国Berkeley大学的CS61A是基于Scheme函数式语言），国内大学几乎清一色采用C/C++/Java等命令式语言作为第一门编程语言。也就是说函数式语言在国外是有文化基础的，所以容易流行，国内没有这样的文化基础，所以难以流行。</p>
+<p>我们在选型的时候，尽量采用在国内有文化基础，已经落地开花的技术，盲目追求国外新技术有可能文化不适应反而难于落地。</p>
+<p>同样的，在A公司流行的技术，在B公司也未必流行。比方说BAT三家公司所采用和后面演化出来的技术栈就明显不同，这同样和三家公司不同的业务领域和文化基因有关系。我们在做技术选型的时候，也要考虑公司的文化特性，如业务模式、已有技术生态和开发人员技能等现实情况。</p>
+<h3 id="七、开源还是第三方软件提供商的技术"><a href="#七、开源还是第三方软件提供商的技术" class="headerlink" title="七、开源还是第三方软件提供商的技术"></a>七、开源还是第三方软件提供商的技术</h3><p>互联网时代，传统的企业软件供应商开始明显地走下坡路，企业越来越多的采用开源技术来开发他们的业务系统，开源软件具有如下优势：</p>
+<ol>
+<li>成本，商业软件一般有昂贵的license费用；</li>
+<li>避免供应商绑定(vendor lockin)；</li>
+<li>灵活的定制能力，现代企业需要灵活的软件定制能力以应对快速变化的用户需求，商业闭源软件常常缺乏这种能力；</li>
+<li>社区和生态，投资具有良好社区和生态的开源技术是企业技术选型的最佳实践。</li>
+</ol>
+<p>即使是开源软件，这里面有一个很重要的闭环问题。有些开源软件是一线互联网公司成功落地后再开源出来的，比如阿里的dubbo，点评的CAT，这些公司本身有场景，内部大量使用，也就是说内部已经形成反馈闭环，开源出来和社区又形成了一个更大的反馈闭环。有一些第三方软件供应商提供的开源软件，其实他们本身是没有业务场景的（或者场景非常有限），主要靠社区使用后才能形成反馈闭环，对于这类开源软件的使用需要谨慎，如果选择的话，可能需要一起帮忙踩坑形成社区反馈闭环。</p>
+<h3 id="八、使用能掌控的技术"><a href="#八、使用能掌控的技术" class="headerlink" title="八、使用能掌控的技术"></a>八、使用能掌控的技术</h3><p>技术和武器一样，并不是说越先进越好。就像航空母舰和F117这样的尖端武器，确实非常厉害，但是掌握和部署运维这些武器的成本非常之高，如果你的团队没有足够的能力运维和掌控这样的武器，那么这些武器摆在家里充其量只能是摆设，不能形成战斗力，有时甚至还会拖累业务。</p>
+<p>在大数据领域重量级武器尤其多（Hadoop, HBase, Spark, Storm…），很多产品既消耗机器资源，部署和运维也非常复杂，如果某种重量级武器被应用在关键业务上，一旦出问题，团队能不能hold住是要重点考虑的，否则可能会死得很难看。架构师需要根据业务阶段规模，团队规模和技能水平，综合评估后再考虑引入，如果团队能力还不足以掌控某种重量级技术，则可以先从轻量级技术开始。</p>
+<h3 id="九、剑要交给懂得挥舞它的人"><a href="#九、剑要交给懂得挥舞它的人" class="headerlink" title="九、剑要交给懂得挥舞它的人"></a>九、剑要交给懂得挥舞它的人</h3><p>同一种技术，不同的人使用，可能会得出完全相反的结论。比如Cassandra这种NoSql分布式数据库，在Netflix有比较成功的应用，Netflix从2010开始将系统迁移到AWS云中，并开始将大部分业务数据从传统Oracle数据库迁移到Cassandra上，Netflix的前架构总监Adrian Cockcroft把他们技术升级的一大成功功劳归结为采用了Cassandra这种天然支持跨数据中心的分布式数据库。但是，在2012年时候，Digg在网站改版升级过程中也试图将传统Mysql数据库迁移到Cassandra Nosql数据库，结果导致Digg网站问题频发，最后技术副总裁John Quinn主动卷铺盖走人。事后，有人将问题归结为Cassandra，这就是著名的Digg使用Cassandra遭遇滑铁卢事件。有人在Quora上发帖提问“Is Cassandra to blame for Digg v4’s technical failures？”[<a href="#appendix">附录17.2</a>]，回帖中有知情人士出来澄清：把Digg网站升级失败归结为Cassandra完全是转移注意力（red herring），背后的真正原因是工程管理和架构的问题（poor engineering management and architecture），简单讲就是人的问题。</p>
+<p>我曾经在2013年左右在携程框架部工作，当时有一个很重要的框架产品叫分布式数据访问层DAL，很多团队都跃跃欲试要做，但是当时的CTO一直没有正式启动这个项目，理由是没有合适的人。这个事情拖了有一年之久才找到合适的人，这个项目才启动并逐步落地，现在已经是携程框架的关键基础设施，承载携程大部分数据库访问流量。</p>
+<p>对于一些重量级的，处于业务关键链路上的产品，如果它重要但不紧急的话，一定要找到并交给能搞定它的人。把一个重要产品交给一个不合适的人，不仅不能解决问题，后续还常常会制造问题。设想一下业务的关键链路上的某个关键产品质量不过关，问题频发，但是业务已经跑在上面无法简单替换，这是让人很无奈的事情，很多架构老司机对此场景应该深有体会吧。</p>
+<h3 id="十、浪费是创新的副产品"><a href="#十、浪费是创新的副产品" class="headerlink" title="十、浪费是创新的副产品"></a>十、浪费是创新的副产品</h3><p>即使在同一个公司中，在主流技术栈的基础上，不同团队适当引入一些不同的技术栈，比如一个公司主流的技术栈是Java，有些前端团队会尝试用Nodejs开发应用，有些大数据团队会采用Python开发应用（Python里头有很多数据分析库）。这些做法和第二点提出的少即是多并不矛盾，根据业务场景的需要，适当引入一些互补的技术栈，适度冗余可以促进团队创新。</p>
+<p>再举个例子，阿里在发展的过程中，曾经发展出两套技术体系，一套是淘宝体系，一套是B2B体系。有一段时间内，两套体系并行发展，团队之间既竞争也相互借鉴，形成一个良性竞争的技术生态。据说Dubbo最早就是B2B搞出来的，淘宝后面又搞了一套HSF（未开源），Dubbo和HSF之间相互借鉴所以功能比较类似，阿里在2014年上市前对技术栈进行了整合，集团统一使用HSF，Dubbo则继续活跃在开源社区，成为中国开源软件的一个传奇，它的成功一方面源自阿里技术的沉淀，另一方面也是B2B和淘宝相关团队思路碰撞融合的结果。</p>
+<h3 id="十一、技术的宗教信仰"><a href="#十一、技术的宗教信仰" class="headerlink" title="十一、技术的宗教信仰"></a>十一、技术的宗教信仰</h3><p>很多技术人员对他们投入时间最多最熟悉的技术栈比较热衷，有些甚至能上升到宗教信仰的程度，不同派系还会有相互鄙视的情况出现（据说PHP是最被鄙视的语言），有的还会发展到派系争斗的地步。之前我在一家互联网公司，在容器PaaS平台选型上出现了两个派系，分别被戏称为K党和M党，K党主张引入谷歌推的Kubernetes，M党主张基于Mesos做定制，两拨人都非常坚持互不相让，争得不可开交。</p>
+<p>其实我个人对技术的宗教信仰是非常排斥的，它是一种技术视野狭隘的表现，技术本身没有绝对的好坏之分，只有适用场景和利弊之分。但是，技术的宗教信仰是一种客观存在，有经验的架构师在做技术选型时需要考虑这一层面的因素。</p>
+<h3 id="十二、通过背书做技术选型"><a href="#十二、通过背书做技术选型" class="headerlink" title="十二、通过背书做技术选型"></a>十二、通过背书做技术选型</h3><p>和一线资深的架构师或者技术专家交流，获取技术选型的专家建议，是一种比较靠谱的技术选型策略。专家是一种背书，他们踩坑无数才成为专家，对很多技术有一手的实战经验，是真正know how的人，所以他们给出的建议一般都比较接地气。</p>
+<p>大公司是一个很好的背书，比方说Google，当初它推出Kubernetes的时候，其实我一开始看过架构设计之后是对这个产品嗤之以鼻的。但是Google的强大背书和号召力摆在那里，用户深信Google用脚投票，一开始架构设计不好不是根本性问题，只要有足够的用户形成社区闭环，这个产品就会不断长好长大。目前K8S已经基本垄断了容器PaaS平台市场，它的成功很大程度归结为Google公司的背书影响力。所以，绑着技术型大公司这个背书做技术选型，大概率不至于大错（当然不是绝对）。</p>
+<p>Github上的星的数量也是一个重要的技术选型参考，同时还有项目代码和文档更新频度（尤其是近期），这些指标直接反应开源项目的社区活跃度和生命力。</p>
+<h3 id="十三、实践出真知"><a href="#十三、实践出真知" class="headerlink" title="十三、实践出真知"></a>十三、实践出真知</h3><p>实际评估一项技术时，最靠谱的做法还是详细研究其文档，做一些样例和测试，对性能有要求的则必须实际做充分压力测试获得真实性能数据。对于开源的产品，如果处在业务的关键链路上，则建议把代码拉下来通读梳理一把，深入理解其内部设计和架构，有的还需要根据企业业务场景适当做一些定制。</p>
+<p>通过初步评估，仍需要寻找一定数量非关键试点项目（pilot project）做试水躺坑，经过初步生产验证，才可以考虑逐步扩大生产普及的规模。</p>
+<p>实践出真知，对于那些长期在一线实战和积累的架构师，他们最终将获得良好的技术选型的sense和对新技术的敏锐性。</p>
+<h3 id="十四、技术的落地"><a href="#十四、技术的落地" class="headerlink" title="十四、技术的落地"></a>十四、技术的落地</h3><p>简单回顾下我国辽宁号航母的历史：1999年中国购买了瓦良格号，于2002年3月拖回大连港，2005年4月开始由中国海军继续建造改进，2012年9月正式更名辽宁号，交付中国人民解放军海军，2013年11月，辽宁舰从青岛远赴中国南海展开为期47天的海上综合演练，标志着辽宁号航母开始具备海上编队战斗群能力。我国前前后后花费超过10年才让辽宁号航母初步形成战力能力。</p>
+<p>技术和武器一样，你引入一个技术是一码事，真正落地形成战斗力或者说产生业务价值完全是另外一码事。技术一般有落地周期：引入，定制改造，小规模试点，再到逐步扩大生产规模，这个周期可长可短，对于一些基础性和重量级的技术，或者涉及大规模遗留系统升级改造的技术，一般周期比较漫长（可能时间跨度长达1年甚至几年），对于这类技术的引入和落地，架构师需要高屋建瓴，通盘考虑，制定落地计划，分阶段推进技术的落地。</p>
+<h3 id="十五、定制、自研还是购买"><a href="#十五、定制、自研还是购买" class="headerlink" title="十五、定制、自研还是购买"></a>十五、定制、自研还是购买</h3><p>这个问题比较复杂，很难一概而论，和企业的业务和团队规模，架构甚至文化等诸多因素有关系。我个人遵循的两个简单原则分别是：</p>
+<ol>
+<li>如果不是你最擅长，也提供不了差异化的竞争优势的技术则直接用开源或者购买。小心Not Invented Here症状，避免重复造轮子，始终牢记达成业务目标才是重点。</li>
+<li>当企业的业务和团队规模达到一定阶段，对于处在业务关键链路上的核心技术，必须要有一定的定制甚至自研能力。创业公司尽量用开源或者购买云服务，验证业务模式是第一优先；当你的业务模式获得验证，业务和团队达到一定规模，则需逐步考虑对核心业务链路上的技术进行定制甚至自研，以获得更大的灵活性；如果你成长到接近BAT那个量级，那么大部分核心技术必然是定制甚至自研的，否则无法支撑那个规模。</li>
+</ol>
+<h3 id="十六、写在最后"><a href="#十六、写在最后" class="headerlink" title="十六、写在最后"></a>十六、写在最后</h3><p>本文仅限个人经验视角，技术选型理念仅供参考借鉴。每个企业的具体上下文（业务场景，团队组织，技术架构等）各不相同，每个架构师的背景经验也各不相同，大家要结合实际自己做出选型，没有最好的技术，只有相对较合适的技术。另外，好的技术选型是相互借鉴甚至PK出来的，欢迎大家讨论，给出自己的技术选型思考。</p>
+<h3 id="十七、附录"><a href="#十七、附录" class="headerlink" title="十七、附录"></a>十七、附录</h3><ol>
+<li><a href="https://12factor.net/" target="_blank" rel="noopener">12 Factor App</a></li>
+<li><a href="https://www.quora.com/Is-Cassandra-to-blame-for-Digg-v4s-technical-failures" target="_blank" rel="noopener">Is Cassandra to blame for Digg v4’s technical failures?</a></li>
+</ol>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+    <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more">分享到：</a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间">QQ空间</a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博">新浪微博</a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博">腾讯微博</a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网">人人网</a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信">微信</a>
+</div>
+<script>
+window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"share":{"bdSize":16}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+<style>
+    .bdshare_popup_box {
+        border-radius: 4px;
+        border: #e1e1e1 solid 1px;
+    }
+    .bdshare-button-style0-16 a,
+    .bdshare-button-style0-16 .bds_more {
+        padding-left: 20px;
+        margin: 6px 10px 6px 0;
+    }
+    .bdshare_dialog_list a,
+    .bdshare_popup_list a,
+    .bdshare_popup_bottom a {
+        font-family: 'Microsoft Yahei';
+    }
+    .bdshare_popup_top {
+        display: none;
+    }
+    .bdshare_popup_bottom {
+        height: auto;
+        padding: 5px;
+    }
+</style>
+
+
+</div>
+
+            
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2018/05/27/20180527/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    中国式微服务技术栈2.0
+                
+            </div>
+        </a>
+    
+    
+        <a href="/2018/05/24/20180524/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">成长型组织如何突破技术困局</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    
+        <section id="comments">
+    <div id="valine-thread"></div>
+</section>
+    
+
+</section>
+            
+                
+<aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060702/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060702/zuul.png)" alt="微服务架构~BFF和网关是如何演化出来的" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060702/" class="title">微服务架构~BFF和网关是如何演化出来的</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T05:51:33.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/06/07/2018060701/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018060701/th.jpg)" alt="微服务架构~为什么要配置中心" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/06/07/2018060701/" class="title">微服务架构~为什么要配置中心</a></p>
+                            <p class="item-date"><time datetime="2018-06-07T03:23:10.000Z" itemprop="datePublished">2018-06-07</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052902/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052902/service1.jpg)" alt="微服务2.0技术栈选型手册" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/微服务架构/">微服务架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052902/" class="title">微服务2.0技术栈选型手册</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T03:00:26.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/29/2018052901/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/2018052901/building_blocks.jpg)" alt="架构之道~四种核心架构思维" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/29/2018052901/" class="title">架构之道~四种核心架构思维</a></p>
+                            <p class="item-date"><time datetime="2018-05-29T02:49:22.000Z" itemprop="datePublished">2018-05-29</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2018/05/28/20180528/" class="thumbnail">
+    
+    
+        <span style="background-image:url(/images/20180528/Features-5.png)" alt="架构之道~现代发布模式" class="thumbnail-image"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/系统架构/">系统架构</a></p>
+                            <p class="item-title"><a href="/2018/05/28/20180528/" class="title">架构之道~现代发布模式</a></p>
+                            <p class="item-date"><time datetime="2018-05-28T08:33:31.000Z" itemprop="datePublished">2018-05-28</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">分类</h3>
+        <div class="widget">
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/微服务架构/">微服务架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术管理/">技术管理</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/系统架构/">系统架构</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计模式/">设计模式</a><span class="category-list-count">2</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/BFF/" style="font-size: 10px;">BFF</a> <a href="/tags/Netflix/" style="font-size: 10px;">Netflix</a> <a href="/tags/创建模式/" style="font-size: 10px;">创建模式</a> <a href="/tags/发布模式/" style="font-size: 10px;">发布模式</a> <a href="/tags/工程师成长/" style="font-size: 10px;">工程师成长</a> <a href="/tags/微服务/" style="font-size: 20px;">微服务</a> <a href="/tags/技术转型/" style="font-size: 10px;">技术转型</a> <a href="/tags/技术选型/" style="font-size: 16.67px;">技术选型</a> <a href="/tags/架构思维/" style="font-size: 10px;">架构思维</a> <a href="/tags/架构理念/" style="font-size: 10px;">架构理念</a> <a href="/tags/架构设计/" style="font-size: 10px;">架构设计</a> <a href="/tags/结构模式/" style="font-size: 10px;">结构模式</a> <a href="/tags/网关/" style="font-size: 10px;">网关</a> <a href="/tags/设计模式/" style="font-size: 13.33px;">设计模式</a> <a href="/tags/配置中心/" style="font-size: 10px;">配置中心</a>
+        </div>
+    </div>
+
+    
+    <div id="toTop" class="fas fa-angle-up"></div>
+</aside>
+
+            
+        </div>
+        <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 <i class="fa fa-heart"></i> 波波微课<br>
+            <span id="busuanzi_container_site_pv">访问量 <span id="busuanzi_value_site_pv" style="color:#49c8fb;font-size:16px;"></span> 次</span>&nbsp;
+            <span id="busuanzi_container_site_uv">访客数 <span id="busuanzi_value_site_uv" style="color:#49c8fb;font-size:16px;"></span> 人次</span>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+    <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = '{{ theme.comment.valine.guest_info }}';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#valine-thread' ,
+        notify: true,
+        verify: true,
+        app_id: 'Bk7O038fcRfCk1WIcrhXopLO-9Nh9j0Va',
+        app_key: 'Otvliugzag188cyB1ojvmAB5',
+        placeholder: '',
+        avatar: '',
+        guest_info: GUEST,
+        pageSize: '10' || 10,
+    });
+    </script>
+
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>
