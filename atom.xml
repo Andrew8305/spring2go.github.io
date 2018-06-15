@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://spring2go.com/"/>
   <updated>2018-06-15T07:17:49.913Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://spring2go.com/</id>
   
   <author>
     <name>波波老师</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>微服务架构~BFF和网关是如何演化出来的</title>
-    <link href="http://yoursite.com/2018/06/07/2018060702/"/>
-    <id>http://yoursite.com/2018/06/07/2018060702/</id>
+    <link href="http://spring2go.com/2018/06/07/2018060702/"/>
+    <id>http://spring2go.com/2018/06/07/2018060702/</id>
     <published>2018-06-07T05:51:33.000Z</published>
     <updated>2018-06-15T07:17:49.913Z</updated>
     
@@ -32,21 +32,21 @@
     
     </summary>
     
-      <category term="微服务架构" scheme="http://yoursite.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+      <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
-      <category term="BFF" scheme="http://yoursite.com/tags/BFF/"/>
+      <category term="BFF" scheme="http://spring2go.com/tags/BFF/"/>
     
-      <category term="网关" scheme="http://yoursite.com/tags/%E7%BD%91%E5%85%B3/"/>
+      <category term="网关" scheme="http://spring2go.com/tags/%E7%BD%91%E5%85%B3/"/>
     
   </entry>
   
   <entry>
     <title>微服务架构~为什么要配置中心</title>
-    <link href="http://yoursite.com/2018/06/07/2018060701/"/>
-    <id>http://yoursite.com/2018/06/07/2018060701/</id>
+    <link href="http://spring2go.com/2018/06/07/2018060701/"/>
+    <id>http://spring2go.com/2018/06/07/2018060701/</id>
     <published>2018-06-07T03:23:10.000Z</published>
     <updated>2018-06-15T08:00:31.921Z</updated>
     
@@ -58,19 +58,19 @@
     
     </summary>
     
-      <category term="微服务架构" scheme="http://yoursite.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+      <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
-      <category term="配置中心" scheme="http://yoursite.com/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/"/>
+      <category term="配置中心" scheme="http://spring2go.com/tags/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83/"/>
     
   </entry>
   
   <entry>
     <title>微服务2.0技术栈选型手册</title>
-    <link href="http://yoursite.com/2018/05/29/2018052902/"/>
-    <id>http://yoursite.com/2018/05/29/2018052902/</id>
+    <link href="http://spring2go.com/2018/05/29/2018052902/"/>
+    <id>http://spring2go.com/2018/05/29/2018052902/</id>
     <published>2018-05-29T03:00:26.000Z</published>
     <updated>2018-06-15T11:37:56.871Z</updated>
     
@@ -83,19 +83,19 @@
     
     </summary>
     
-      <category term="微服务架构" scheme="http://yoursite.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+      <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="技术选型" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
-      <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="技术选型" scheme="http://spring2go.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>架构之道~四种核心架构思维</title>
-    <link href="http://yoursite.com/2018/05/29/2018052901/"/>
-    <id>http://yoursite.com/2018/05/29/2018052901/</id>
+    <link href="http://spring2go.com/2018/05/29/2018052901/"/>
+    <id>http://spring2go.com/2018/05/29/2018052901/</id>
     <published>2018-05-29T02:49:22.000Z</published>
     <updated>2018-06-15T11:25:56.583Z</updated>
     
@@ -108,17 +108,17 @@
     
     </summary>
     
-      <category term="系统架构" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+      <category term="系统架构" scheme="http://spring2go.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="架构思维" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E6%80%9D%E7%BB%B4/"/>
+      <category term="架构思维" scheme="http://spring2go.com/tags/%E6%9E%B6%E6%9E%84%E6%80%9D%E7%BB%B4/"/>
     
   </entry>
   
   <entry>
     <title>架构之道~现代发布模式</title>
-    <link href="http://yoursite.com/2018/05/28/20180528/"/>
-    <id>http://yoursite.com/2018/05/28/20180528/</id>
+    <link href="http://spring2go.com/2018/05/28/20180528/"/>
+    <id>http://spring2go.com/2018/05/28/20180528/</id>
     <published>2018-05-28T08:33:31.000Z</published>
     <updated>2018-06-15T07:37:55.273Z</updated>
     
@@ -131,17 +131,17 @@
     
     </summary>
     
-      <category term="系统架构" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+      <category term="系统架构" scheme="http://spring2go.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="发布模式" scheme="http://yoursite.com/tags/%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F/"/>
+      <category term="发布模式" scheme="http://spring2go.com/tags/%E5%8F%91%E5%B8%83%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>中国式微服务技术栈2.0</title>
-    <link href="http://yoursite.com/2018/05/27/20180527/"/>
-    <id>http://yoursite.com/2018/05/27/20180527/</id>
+    <link href="http://spring2go.com/2018/05/27/20180527/"/>
+    <id>http://spring2go.com/2018/05/27/20180527/</id>
     <published>2018-05-27T08:19:22.000Z</published>
     <updated>2018-06-15T12:18:24.157Z</updated>
     
@@ -153,19 +153,19 @@
     
     </summary>
     
-      <category term="微服务架构" scheme="http://yoursite.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+      <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="技术选型" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
-      <category term="微服务" scheme="http://yoursite.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+      <category term="技术选型" scheme="http://spring2go.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>波波的技术选型哲学</title>
-    <link href="http://yoursite.com/2018/05/25/20180525/"/>
-    <id>http://yoursite.com/2018/05/25/20180525/</id>
+    <link href="http://spring2go.com/2018/05/25/20180525/"/>
+    <id>http://spring2go.com/2018/05/25/20180525/</id>
     <published>2018-05-25T03:24:35.000Z</published>
     <updated>2018-06-15T12:21:20.806Z</updated>
     
@@ -178,17 +178,17 @@
     
     </summary>
     
-      <category term="技术管理" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
+      <category term="技术管理" scheme="http://spring2go.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
     
     
-      <category term="技术选型" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+      <category term="技术选型" scheme="http://spring2go.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>成长型组织如何突破技术困局</title>
-    <link href="http://yoursite.com/2018/05/24/20180524/"/>
-    <id>http://yoursite.com/2018/05/24/20180524/</id>
+    <link href="http://spring2go.com/2018/05/24/20180524/"/>
+    <id>http://spring2go.com/2018/05/24/20180524/</id>
     <published>2018-05-24T03:24:02.000Z</published>
     <updated>2018-06-15T08:06:51.731Z</updated>
     
@@ -202,17 +202,17 @@
     
     </summary>
     
-      <category term="技术管理" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
+      <category term="技术管理" scheme="http://spring2go.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
     
     
-      <category term="技术转型" scheme="http://yoursite.com/tags/%E6%8A%80%E6%9C%AF%E8%BD%AC%E5%9E%8B/"/>
+      <category term="技术转型" scheme="http://spring2go.com/tags/%E6%8A%80%E6%9C%AF%E8%BD%AC%E5%9E%8B/"/>
     
   </entry>
   
   <entry>
     <title>聊聊Netflix技术那些大胆的创新</title>
-    <link href="http://yoursite.com/2018/05/23/20180523/"/>
-    <id>http://yoursite.com/2018/05/23/20180523/</id>
+    <link href="http://spring2go.com/2018/05/23/20180523/"/>
+    <id>http://spring2go.com/2018/05/23/20180523/</id>
     <published>2018-05-23T13:01:29.000Z</published>
     <updated>2018-06-15T11:49:52.286Z</updated>
     
@@ -225,17 +225,17 @@
     
     </summary>
     
-      <category term="技术管理" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
+      <category term="技术管理" scheme="http://spring2go.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
     
     
-      <category term="Netflix" scheme="http://yoursite.com/tags/Netflix/"/>
+      <category term="Netflix" scheme="http://spring2go.com/tags/Netflix/"/>
     
   </entry>
   
   <entry>
     <title>架构师必须知道的架构设计原则</title>
-    <link href="http://yoursite.com/2018/05/21/20180521/"/>
-    <id>http://yoursite.com/2018/05/21/20180521/</id>
+    <link href="http://spring2go.com/2018/05/21/20180521/"/>
+    <id>http://spring2go.com/2018/05/21/20180521/</id>
     <published>2018-05-21T06:30:56.000Z</published>
     <updated>2018-06-15T08:07:44.931Z</updated>
     
@@ -248,17 +248,17 @@
     
     </summary>
     
-      <category term="系统架构" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+      <category term="系统架构" scheme="http://spring2go.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="架构设计" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+      <category term="架构设计" scheme="http://spring2go.com/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
     
   </entry>
   
   <entry>
     <title>工程师成长快车道</title>
-    <link href="http://yoursite.com/2018/05/20/20180520/"/>
-    <id>http://yoursite.com/2018/05/20/20180520/</id>
+    <link href="http://spring2go.com/2018/05/20/20180520/"/>
+    <id>http://spring2go.com/2018/05/20/20180520/</id>
     <published>2018-05-20T05:54:50.000Z</published>
     <updated>2018-06-15T07:13:44.858Z</updated>
     
@@ -271,17 +271,17 @@
     
     </summary>
     
-      <category term="技术管理" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
+      <category term="技术管理" scheme="http://spring2go.com/categories/%E6%8A%80%E6%9C%AF%E7%AE%A1%E7%90%86/"/>
     
     
-      <category term="工程师成长" scheme="http://yoursite.com/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF/"/>
+      <category term="工程师成长" scheme="http://spring2go.com/tags/%E5%B7%A5%E7%A8%8B%E5%B8%88%E6%88%90%E9%95%BF/"/>
     
   </entry>
   
   <entry>
     <title>波波的架构理念</title>
-    <link href="http://yoursite.com/2018/05/17/20180517/"/>
-    <id>http://yoursite.com/2018/05/17/20180517/</id>
+    <link href="http://spring2go.com/2018/05/17/20180517/"/>
+    <id>http://spring2go.com/2018/05/17/20180517/</id>
     <published>2018-05-17T08:57:58.000Z</published>
     <updated>2018-06-15T07:45:55.441Z</updated>
     
@@ -295,17 +295,17 @@
     
     </summary>
     
-      <category term="系统架构" scheme="http://yoursite.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+      <category term="系统架构" scheme="http://spring2go.com/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="架构理念" scheme="http://yoursite.com/tags/%E6%9E%B6%E6%9E%84%E7%90%86%E5%BF%B5/"/>
+      <category term="架构理念" scheme="http://spring2go.com/tags/%E6%9E%B6%E6%9E%84%E7%90%86%E5%BF%B5/"/>
     
   </entry>
   
   <entry>
     <title>攻城狮学习时间~六种结构模式</title>
-    <link href="http://yoursite.com/2018/04/27/20180427/"/>
-    <id>http://yoursite.com/2018/04/27/20180427/</id>
+    <link href="http://spring2go.com/2018/04/27/20180427/"/>
+    <id>http://spring2go.com/2018/04/27/20180427/</id>
     <published>2018-04-27T11:25:55.000Z</published>
     <updated>2018-06-15T12:23:02.462Z</updated>
     
@@ -317,19 +317,19 @@
     
     </summary>
     
-      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="http://spring2go.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="http://spring2go.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-      <category term="结构模式" scheme="http://yoursite.com/tags/%E7%BB%93%E6%9E%84%E6%A8%A1%E5%BC%8F/"/>
+      <category term="结构模式" scheme="http://spring2go.com/tags/%E7%BB%93%E6%9E%84%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
     <title>攻城狮学习时间~七种创建模式</title>
-    <link href="http://yoursite.com/2018/04/18/20180418/"/>
-    <id>http://yoursite.com/2018/04/18/20180418/</id>
+    <link href="http://spring2go.com/2018/04/18/20180418/"/>
+    <id>http://spring2go.com/2018/04/18/20180418/</id>
     <published>2018-04-18T12:02:59.000Z</published>
     <updated>2018-06-15T12:22:35.413Z</updated>
     
@@ -341,12 +341,12 @@
     
     </summary>
     
-      <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="http://spring2go.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
     
-      <category term="设计模式" scheme="http://yoursite.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <category term="设计模式" scheme="http://spring2go.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
-      <category term="创建模式" scheme="http://yoursite.com/tags/%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%BC%8F/"/>
+      <category term="创建模式" scheme="http://spring2go.com/tags/%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   
