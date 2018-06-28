@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://spring2go.com/"/>
-  <updated>2018-06-15T07:17:49.913Z</updated>
+  <updated>2018-06-28T08:53:54.196Z</updated>
   <id>http://spring2go.com/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>微服务架构~SoundCloud的微服务是如何分层的</title>
+    <link href="http://spring2go.com/2018/06/28/2018062802/"/>
+    <id>http://spring2go.com/2018/06/28/2018062802/</id>
+    <published>2018-06-28T08:25:02.000Z</published>
+    <updated>2018-06-28T08:53:54.196Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。在上一篇《Netflix的微服务是如何分层的》一文中，我以Netflix公司为案例，分析Netflix的微服务分层架构的组织方式和近期演进。</p><p>本文继续以SoundCloud公司为案例，通过一系列架构视图，展示SoundCloud微服务架构的分层组织方式。如果你阅读并理解了前面两篇文章的内容，那么就比较容易理解本文的内容，所有本文的分析会相对简单一点。</p><p>注，SoundCloud是一家德国网站，提供音乐分享社区服务，成长很快，Alexa世界排名已进入200位以内。</p><a id="more"></a><h3 id="SoundCloud微服务分层架构"><a href="#SoundCloud微服务分层架构" class="headerlink" title="SoundCloud微服务分层架构"></a>SoundCloud微服务分层架构</h3><p>下图展示SoundCloud微服务分层架构：</p><p><img src="/images/2018062802/layered_msa_04.png" alt="layered msa architecture 04"><br>图片来自附录1</p><p>分析：</p><ol><li>SouldCloud采用经典的三层微服务架构，用户体验层-&gt;边界BFF层-&gt;后端微服务层</li><li>SoundCloud的BFF主要分为四类：<ul><li>面向主站的Api-V2 BFF</li><li>面向移动端的Api-mobile BFF</li><li>面向嵌入页面场景的Api-embeded BFF</li><li>面向开放平台场景的Public API BFF</li></ul></li><li>SoundCloud没有像Netflix那样的独立的网关Gateway层，它的BFF层融合了网关功能+服务聚合裁剪和适配功能</li><li>SoundCloud的微服务分层架构也是为了应对业务和技术挑战，不断演化出来的。关于其内部微服务的演进历程，以及BFF在演进中扮演的角色，可以参考ThoughtWorks上的文章BFF@SoundCloud[附录3]</li></ol><p>下面是SoundCloud微服务的另一个架构视图，展示了一些额外细节，<br><img src="/images/2018062802/layered_msa_01.png" alt="layered msa architecture 01"><br>图片来自附录2</p><p>分析：</p><ol><li>SoundCloud的BFF层兼具网关作用，会横向调用一些跨横切面的服务，例如，限流，认证，安全和ip定位等。这些跨横切面的能力由网关统一处理以后，后面的微服务就不需要再调用。</li><li>SoundCloud对其微服务层又进一步做了一次细分：<ul><li>基础服务层，SoundCloud最底层的领域服务，例如tracks/users/playlists/stats/images等。</li><li>增值服务层，在基础服务基础上再封装提供一些增值的服务，例如track-coordinator/timeline/creator-stats等。</li></ul></li></ol><p>下面是SoundCloud微服务的另外一个更全面的架构视图<br><img src="/images/2018062802/layered_msa_02.png" alt="layered msa architecture"><br>图片来自附录1</p><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ol><li>Netflix的微服务架构有独立的网关层，SoundCloud则没有独立网关层，它的网关和BFF层是融合在一起的。我认为这个和两家公司的业务体量和团队规模不同有关。Netflix业务体量更大也更复杂，需要独立的网关层实现架构上的关注分离，保障研发交付效率。SoundCloud则业务体量和团队规模相对小，暂时还没有分解那么细。将网关和BFF融合的做法，在国内很多公司也是这么实践的。</li><li>SoundCloud对其微服务还进行了一层细分，包括基础服务+增值服务，这个应该是架构师根据需要，额外定义的一种架构分层规范，有助于研发人员更清晰理解架构，并遵循架构规范开展研发。</li><li>Netflix/SoundCloud等大公司的微服务分层架构仅供参考，各家做法有差异，但是背后原理相同。架构师要理解其背后的分布式原理，然后灵活应用，不可拘泥照搬。</li><li>SoundCloud还给出微服务架构的一种更抽象的描述，如下图所示，微服务架构本质上可以理解成是一种分布式的企业操作系统<ul><li>内核是一个企业的业务领域基础服务</li><li>第二层是BFF，将基础服务聚合裁剪适配，暴露面向不同用户体验的API</li><li>第三层是面向不同用户体验(无线\PC\开放平台等)的客户应用</li><li>最外层是使用这个企业操作系统的用户</li></ul></li></ol><p><img src="/images/2018062802/distributed_os.png" alt="msa os"><br>图片来自附录1</p><h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><ol><li><p><a href="https://www.slideshare.net/grandbora/soundclouds-toolbox-for-microservices" target="_blank" rel="noopener">SoundCloud’s Toolbox for Microservices</a></p></li><li><p><a href="https://www.slideshare.net/grandbora/microservices-soundcloud" target="_blank" rel="noopener">Microservices @ SoundCloud</a></p></li><li><p><a href="https://www.thoughtworks.com/insights/blog/bff-soundcloud" target="_blank" rel="noopener">BFF @ SoundCloud</a></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;p&gt;在前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。在上一篇《Netflix的微服务是如何分层的》一文中，我以Netflix公司为案例，分析Netflix的微服务分层架构的组织方式和近期演进。&lt;/p&gt;
+&lt;p&gt;本文继续以SoundCloud公司为案例，通过一系列架构视图，展示SoundCloud微服务架构的分层组织方式。如果你阅读并理解了前面两篇文章的内容，那么就比较容易理解本文的内容，所有本文的分析会相对简单一点。&lt;/p&gt;
+&lt;p&gt;注，SoundCloud是一家德国网站，提供音乐分享社区服务，成长很快，Alexa世界排名已进入200位以内。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+      <category term="SoundCloud" scheme="http://spring2go.com/tags/SoundCloud/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>微服务架构~Netflix的微服务是如何分层的</title>
+    <link href="http://spring2go.com/2018/06/28/2018062801/"/>
+    <id>http://spring2go.com/2018/06/28/2018062801/</id>
+    <published>2018-06-28T08:24:55.000Z</published>
+    <updated>2018-06-28T08:38:02.189Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在之前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关Gateway是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。</p><p>在本文和后续一篇文章中，我会分析Netflix(本文)和SoundCloud(下一篇)两家公司的微服务分层架构，帮助大家更深入理解BFF和网关Gateway在分布式微服务架构中的地位和作用，以及前沿互联网公司的微服务架构是如何分层组织的。希望对架构师理解和实践微服务架构有所帮助。</p><p>本文通过三个架构视图，展示Netflix微服务的分层架构。另外，2017~2018年间，Netflix对其微服务分层架构进行了升级，本文也会分析这次升级背后的架构驱动因素。</p><a id="more"></a><h3 id="Netflix微服务分层架构-2017前"><a href="#Netflix微服务分层架构-2017前" class="headerlink" title="Netflix微服务分层架构(2017前)"></a>Netflix微服务分层架构(2017前)</h3><p>下面两个架构图分别展示2017年前的Netflix微服务分层架构，两个图展示的总体分层架构是一致的，只是视角不同：</p><p><img src="/images/2018062801/arch_2017_1.png" alt="arch 2017 before 1"><br>图片来自附录1</p><p><img src="/images/2018062801/arch_2017_2.png" alt="arch 2018 before 2"><br>图片来自附录2</p><p>这个分层架构和《BFF和网关是如何演化出来的》一文中的V4架构基本类似，共分四个层次</p><ol><li><strong>用户体验层</strong>，据说Netflix要支持超过一千种的不同设备体验，这个对Netflix技术团队特别是前端团队是一个巨大的挑战。</li><li><strong>网关路由层</strong>，Netflix使用Zuul网关作为服务路由层，同时兼具安全认证，监控，限流熔断等跨横切面功能。Zuul网关无状态以集群方式部署，网关依赖AWS ELB做负载均衡。</li><li><strong>边界API层</strong>，Netflix的裁剪聚合和适配层，也就是BFF层，将后端微服务，适配到不同的前端体验。在Netflix体系中，该层也称Edge Service Layer。</li><li><strong>微服务层</strong>，Netflix的核心领域服务，也称中间层(Middle Tier)服务。</li></ol><p>网关+边界API层(BFF)+一些前端服务(如安全认证，Playback相关服务，DRM等)，统一由一个Netflix的前端团队负责，该团队也称边界工程(Edge Engineering)团队。</p><p>因为Netflix要应对处理的设备类型巨多，所以它们在边界层投入了很大工程技术资源，2017年前Netflix的边界API层(BFF)具有下面架构特点：</p><ol><li>整个边界API层(BFF)住在一个PaaS平台里头，称为Edge PaaS。</li><li>Edge PaaS本质上是一个动态脚本平台(Dyanmic Scripting Platform)，支持使用Groovy等JVM脚本语言，方便前端团队快速聚合裁剪后端微服务，并向前端设备暴露友好的API。之所以使用动态脚本语言Groovy，主要是考虑脚本语言对前端开发的友好性和生产率。</li><li>Edge PaaS里头同时预置后端微服务的Java客户端SDK，方便Groovy脚本调用后端服务，同时对客户端进行Hystrix埋点，保障对后台微服务调用的稳定性。</li><li>由于前端需求变更比较频繁，所以Edge PaaS里头的脚本一般更新也比较频繁，前端团队可以按需每日更新，上传动态脚本即可。</li><li>如果后端微服务有升级更新，一般需要升级Edge PaaS里头的客户端SDK，但是这个不是频繁操作，一般以固定周期（比如两周一个full release）发生，但是集成回归测试成本还是比较高的。</li></ol><p>关于Netflix动态脚本平台的更多技术细节，可以参考其官方博客[附录4]。</p><h3 id="Netflix微服务分层架构-2018"><a href="#Netflix微服务分层架构-2018" class="headerlink" title="Netflix微服务分层架构(2018)"></a>Netflix微服务分层架构(2018)</h3><p>上述的Edge PaaS其实是一个单块架构，随着Netflix的前端业务变得更加复杂，Edge PaaS也逐渐遭遇康威法则的约束，暴露出如下问题：</p><ol><li>Edge PaaS里头同时耦合了前端聚合裁剪适配和后端API/SDK逻辑，当后端API有升级，一般需要升级Edge PaaS里头的客户端SDK，这种升级可能因不兼容和测试不充分，造成前端业务代码出问题。总体上前后端团队因升级、集成测试而造成的沟通协调成本非常大。</li><li>所有面向用户体验的脚本逻辑都住在一套Edge PaaS里头，缺乏隔离性，当某个团队的脚本有bug，很容易负面影响到其它脚本。整个Edge PaaS也是一个大单点(Single Point of Failure)，严重脚本缺陷或者流量洪峰可致集群宕机。</li><li>前端脚本有上传快和动态加载等优势，但是本地调试不方便，很多依赖的环境(Edge PaaS + API/SDK)难以在本地开发环境复制，造成开发反馈效率低下，出现问题排障困难。</li></ol><p>为解决上述问题，Netflix边界工程团队对Edge PaaS的架构进行了调整，从单块一分为二，新的架构如下图所示：<br><img src="/images/2018062801/arch_2018_new.png" alt="arch 2018 new"><br>图片来自附录3</p><p>主要变化是将边界API层分成两个子层次：</p><ol><li><strong>API聚合层</strong>，专注对后端微服务进行聚合，提供前端友好、抽象统一的API。API聚合层主要基于Java+后台服务的客户端SDK实现。API聚合层还按业务功能进行分集群部署(API Sharding)。</li><li><strong>设备适配层BFF</strong>，专注对API聚合层的服务进行裁剪和适配，提供给不同的用户体验展示。</li></ol><p>设备聚合层采用对前端开发友好的Node.js框架，各个团队的服务可以独立部署在容器环境(Netflix的容器云Titus)中，使用容器机制进行隔离，避免相互干扰。Node.js+容器在Netflix称为NodeQuark平台。NodeQuark环境在开发人员本地可以搭建，方便开发本地调试。</p><p>经过拆分，当前Netflix演化出一个五层的微服务分层架构，前面三层(用户体验、网关路由和设备适配层)专注解决前端开发人员生产率的问题；后端两层(API聚合层和微服务层)专注解决领域抽象和运维监控稳定性问题。整个体系架构层次职责分明，初步解决了之前单块Edge PaaS的诸多问题，解放了生产率。</p><h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ol><li>Netflix采用经典的微服务分层架构，前端体验-&gt;网关路由-&gt;边界API层(BFF)-&gt;后端微服务。这个分层架构可供一线企业实践微服务参考。</li><li>近年，为了进一步提升前端研发效率，Netflix又将边界API层(BFF)拆分成两个子层次，设备适配层BFF和API聚合层。总体演化出一个五层的微服务分层架构。增加新的层次对于Netflix这种体谅的公司来说，有其架构合理性，但一般企业没必要细分5层，采用上述经典4层架构就OK了。</li><li>从Netflix架构体系演变我们可以看出，为了提升研发效率，它的架构经过多层细分，这种分层会带来一定的性能损失。但是对于前沿大体量的互联网公司，性能一般并不是其架构的首要考量，灵活性、可治理性和研发效率才是它们的首要考量。性能的损失一般可以通过云计算+水平扩展+缓存等手段来弥补。</li><li>波波近期和极客时间合作，推出《微服务架构实践160讲》的视频课程，其中第三个模块(预计6月份推出)，会对Netflix的微服务网关Zuul的升级版Zuul2进行深度剖析，欢迎大家关注。</li></ol><h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><ol><li><p><a href="https://www.slideshare.net/danieljacobson/netflix-edge-engineering-open-house-presentations-june-9-2016" target="_blank" rel="noopener">Netflix Edge Engineering Open House</a></p></li><li><p><a href="https://www.slideshare.net/KatharinaProbst/the-new-netflix-api" target="_blank" rel="noopener">The New Netflix API</a></p></li><li><p><a href="https://www.slideshare.net/kcasella/edge-engineering-women-in-tech-dinner-20180322" target="_blank" rel="noopener">Edge Engineering Women in Tech Dinner</a></p></li><li><p><a href="https://medium.com/netflix-techblog/the-netflix-dynamic-scripting-platform-78c1b18b2a74" target="_blank" rel="noopener">The Netflix Dynamic Scripting Platform</a></p></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h3 id=&quot;介绍&quot;&gt;&lt;a href=&quot;#介绍&quot; class=&quot;headerlink&quot; title=&quot;介绍&quot;&gt;&lt;/a&gt;介绍&lt;/h3&gt;&lt;p&gt;在之前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关Gateway是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。&lt;/p&gt;
+&lt;p&gt;在本文和后续一篇文章中，我会分析Netflix(本文)和SoundCloud(下一篇)两家公司的微服务分层架构，帮助大家更深入理解BFF和网关Gateway在分布式微服务架构中的地位和作用，以及前沿互联网公司的微服务架构是如何分层组织的。希望对架构师理解和实践微服务架构有所帮助。&lt;/p&gt;
+&lt;p&gt;本文通过三个架构视图，展示Netflix微服务的分层架构。另外，2017~2018年间，Netflix对其微服务分层架构进行了升级，本文也会分析这次升级背后的架构驱动因素。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
+    
+    
+      <category term="Netflix" scheme="http://spring2go.com/tags/Netflix/"/>
+    
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>微服务架构~BFF和网关是如何演化出来的</title>
@@ -86,9 +138,9 @@
       <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
       <category term="技术选型" scheme="http://spring2go.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
@@ -156,9 +208,9 @@
       <category term="微服务架构" scheme="http://spring2go.com/categories/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
-    
       <category term="技术选型" scheme="http://spring2go.com/tags/%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B/"/>
+    
+      <category term="微服务" scheme="http://spring2go.com/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   

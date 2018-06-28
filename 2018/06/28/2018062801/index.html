@@ -3,22 +3,22 @@
 <head>
     <meta charset="utf-8">
     
-    <title>聊聊Netflix技术那些大胆的创新 | 波波微课</title>
+    <title>微服务架构~Netflix的微服务是如何分层的 | 波波微课</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="前言昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。 注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能">
-<meta name="keywords" content="Netflix">
+    <meta name="description" content="介绍在之前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关Gateway是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。 在本文和后续一篇文章中，我会分析Netflix(本文)和SoundCloud(下一篇)两家公司的微服务分层架构，帮助大家更深入理解BFF和网关Gateway在分布式微服务架构中的地位和作用，以及前沿互联网公司的微服务架构是如何分层组织的">
+<meta name="keywords" content="Netflix,微服务">
 <meta property="og:type" content="article">
-<meta property="og:title" content="聊聊Netflix技术那些大胆的创新">
-<meta property="og:url" content="http://spring2go.com/2018/05/23/20180523/index.html">
+<meta property="og:title" content="微服务架构~Netflix的微服务是如何分层的">
+<meta property="og:url" content="http://spring2go.com/2018/06/28/2018062801/index.html">
 <meta property="og:site_name" content="波波微课">
-<meta property="og:description" content="前言昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。 注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能">
+<meta property="og:description" content="介绍在之前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关Gateway是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。 在本文和后续一篇文章中，我会分析Netflix(本文)和SoundCloud(下一篇)两家公司的微服务分层架构，帮助大家更深入理解BFF和网关Gateway在分布式微服务架构中的地位和作用，以及前沿互联网公司的微服务架构是如何分层组织的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://spring2go.com/images/20180523/netflix.jpg">
-<meta property="og:updated_time" content="2018-06-15T11:49:52.286Z">
+<meta property="og:image" content="http://spring2go.com/images/2018062801/netflix.png">
+<meta property="og:updated_time" content="2018-06-28T08:38:02.189Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="聊聊Netflix技术那些大胆的创新">
-<meta name="twitter:description" content="前言昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。 注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能">
-<meta name="twitter:image" content="http://spring2go.com/images/20180523/netflix.jpg">
+<meta name="twitter:title" content="微服务架构~Netflix的微服务是如何分层的">
+<meta name="twitter:description" content="介绍在之前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关Gateway是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。 在本文和后续一篇文章中，我会分析Netflix(本文)和SoundCloud(下一篇)两家公司的微服务分层架构，帮助大家更深入理解BFF和网关Gateway在分布式微服务架构中的地位和作用，以及前沿互联网公司的微服务架构是如何分层组织的">
+<meta name="twitter:image" content="http://spring2go.com/images/2018062801/netflix.png">
     
 
     
@@ -221,12 +221,12 @@ var _hmt = _hmt || [];
 </aside>
 
             
-            <section id="main"><article id="post-20180523" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-2018062801" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
             
 	
-		<img src="/images/20180523/netflix.jpg" class="article-banner" />
+		<img src="/images/2018062801/netflix.png" class="article-banner" />
 	
 
 
@@ -237,7 +237,7 @@ var _hmt = _hmt || [];
                 
     
         <h1 class="article-title" itemprop="name">
-            聊聊Netflix技术那些大胆的创新
+            微服务架构~Netflix的微服务是如何分层的
         </h1>
     
 
@@ -246,8 +246,8 @@ var _hmt = _hmt || [];
                         
     <div class="article-date">
         <i class="fas fa-calendar-alt"></i>
-        <a href="/2018/05/23/20180523/">
-            <time datetime="2018-05-23T13:01:29.000Z" itemprop="datePublished">2018-05-23</time>
+        <a href="/2018/06/28/2018062801/">
+            <time datetime="2018-06-28T08:24:55.000Z" itemprop="datePublished">2018-06-28</time>
         </a>
     </div>
 
@@ -255,13 +255,13 @@ var _hmt = _hmt || [];
                         
     <div class="article-category">
     	<i class="fas fa-folder"></i>
-        <a class="article-category-link" href="/categories/技术管理/">技术管理</a>
+        <a class="article-category-link" href="/categories/微服务架构/">微服务架构</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fas fa-tag"></i>
-        <a class="tag-link" href="/tags/Netflix/">Netflix</a>
+        <a class="tag-link" href="/tags/Netflix/">Netflix</a>, <a class="tag-link" href="/tags/微服务/">微服务</a>
     </div>
 
                     </div>
@@ -272,70 +272,60 @@ var _hmt = _hmt || [];
         <div class="article-entry" itemprop="articleBody">
         
             
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>昨天晚上和下属一起吃晚饭，期间聊到Netflix技术那些大胆的创新，事后觉得有必要总结一下，给团队分享，让大家了解世界顶级的技术组织在技术、架构、组织和文化方面的创新。让大家在埋头干活的时候，偶尔也可以抬头看看天（大处着眼，小处着手）。于是就有了这篇文章。</p>
-<p>注意，Netflix技术本身也在快速的迭代进化中，本文主要基于Netflix在slideshare上的分享总结而成，其中的很多内容目前可能已经过时，但是Netflix的创新文化和精神仍然值得我们学习借鉴。</p>
+            <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>在之前一篇《BFF和网关是如何演化出来的》文章中，我向大家解释了BFF和网关Gateway是什么，在微服务架构体系中各承担什么职责，以及它们是如何演化出来的。</p>
+<p>在本文和后续一篇文章中，我会分析Netflix(本文)和SoundCloud(下一篇)两家公司的微服务分层架构，帮助大家更深入理解BFF和网关Gateway在分布式微服务架构中的地位和作用，以及前沿互联网公司的微服务架构是如何分层组织的。希望对架构师理解和实践微服务架构有所帮助。</p>
+<p>本文通过三个架构视图，展示Netflix微服务的分层架构。另外，2017~2018年间，Netflix对其微服务分层架构进行了升级，本文也会分析这次升级背后的架构驱动因素。</p>
 <a id="more"></a>
-<h3 id="一、大规模生产级微服务架构实践"><a href="#一、大规模生产级微服务架构实践" class="headerlink" title="一、大规模生产级微服务架构实践"></a>一、大规模生产级微服务架构实践</h3><p>微服务很多公司(eBay, Amazon, BAT)都有，甚至比Netflix做得更早，但Netflix大概是大规模生产级微服务做得最杰出的。</p>
-<p>100s范围的微服务，1000s范围的每日生产变更，10,000s范围的实例，1,000,000s范围的活跃客户数，1,000,000,000s范围的度量。但是只有10s范围的运维工程师，没有自己的数据中心NOC，应该算微服务DevOps的最高境界了。</p>
-<p><img src="/images/20180523/netflix_ecosystem.jpg" alt="netflix ecosystem"></p>
-<p><img src="/images/20180523/no_noc.jpg" alt="no noc"></p>
-<p><img src="/images/20180523/msa_visualization.jpg" alt="msa visualization"><br>Netflix微服务可视化。</p>
-<h3 id="二、开源整个微服务技术栈"><a href="#二、开源整个微服务技术栈" class="headerlink" title="二、开源整个微服务技术栈"></a>二、开源整个微服务技术栈</h3><p>Netflix微服务技术栈的核心组件基本上都是开源的。Pivotal在2~3年前把Netflix开源的这摊东西封装一下改头换面，再拼凑一些其它东西（配置中心，调用链监控等）就变成了Spring Cloud。现在大家耳熟能详的Zuul网关，Eureka服务发现注册中心，Hystrix熔断限流，Archaius配置等组件，Netflix在2012年左右就都开源出来了。</p>
-<p><img src="/images/20180523/oss_strategy.png" alt="oss strategy"><br>开放开源是Netflix的一种竞争战略。</p>
-<p><img src="/images/20180523/oss_goal.jpg" alt="oss goal"></p>
-<p>Netflix为啥热衷于要搞开源？</p>
+<h3 id="Netflix微服务分层架构-2017前"><a href="#Netflix微服务分层架构-2017前" class="headerlink" title="Netflix微服务分层架构(2017前)"></a>Netflix微服务分层架构(2017前)</h3><p>下面两个架构图分别展示2017年前的Netflix微服务分层架构，两个图展示的总体分层架构是一致的，只是视角不同：</p>
+<p><img src="/images/2018062801/arch_2017_1.png" alt="arch 2017 before 1"><br>图片来自附录1</p>
+<p><img src="/images/2018062801/arch_2017_2.png" alt="arch 2018 before 2"><br>图片来自附录2</p>
+<p>这个分层架构和《BFF和网关是如何演化出来的》一文中的V4架构基本类似，共分四个层次</p>
 <ol>
-<li>将自己的解决方案建立为行业标准和最佳实践</li>
-<li>建立Netflix技术品牌</li>
-<li>雇佣、留住和吸引顶级工程师</li>
-<li>从共享生态中获得反馈输入并受益</li>
+<li><strong>用户体验层</strong>，据说Netflix要支持超过一千种的不同设备体验，这个对Netflix技术团队特别是前端团队是一个巨大的挑战。</li>
+<li><strong>网关路由层</strong>，Netflix使用Zuul网关作为服务路由层，同时兼具安全认证，监控，限流熔断等跨横切面功能。Zuul网关无状态以集群方式部署，网关依赖AWS ELB做负载均衡。</li>
+<li><strong>边界API层</strong>，Netflix的裁剪聚合和适配层，也就是BFF层，将后端微服务，适配到不同的前端体验。在Netflix体系中，该层也称Edge Service Layer。</li>
+<li><strong>微服务层</strong>，Netflix的核心领域服务，也称中间层(Middle Tier)服务。</li>
 </ol>
-<h3 id="三、系统全部迁移AWS公有云"><a href="#三、系统全部迁移AWS公有云" class="headerlink" title="三、系统全部迁移AWS公有云"></a>三、系统全部迁移AWS公有云</h3><p>大致在09/10年左右， Netflix就开始启动上公有云战略（当然背后也是吃了自建数据中心的苦头），应用逐步向AWS迁移，这个过程一共持续了将近5年，到15年的时候，迁移完毕，全部应用上到AWS。09/10年左右的AWS还不太成熟，别说当时，即使现在也没有几个大公司不掂量一下敢提全部迁移公有云的战略。另外AWS能有今天，Netflix也是功不可没，帮Amazon躺了无数的坑。</p>
-<p><img src="/images/20180523/migrate_to_aws.jpg" alt="migrate to aws"></p>
-<h3 id="四、在AWS基础上打造PaaS平台"><a href="#四、在AWS基础上打造PaaS平台" class="headerlink" title="四、在AWS基础上打造PaaS平台"></a>四、在AWS基础上打造PaaS平台</h3><p>Netflix在AWS IAAS的基础上封装打造了自己的PaaS云平台服务(大部分组件开源)，包括</p>
+<p>网关+边界API层(BFF)+一些前端服务(如安全认证，Playback相关服务，DRM等)，统一由一个Netflix的前端团队负责，该团队也称边界工程(Edge Engineering)团队。</p>
+<p>因为Netflix要应对处理的设备类型巨多，所以它们在边界层投入了很大工程技术资源，2017年前Netflix的边界API层(BFF)具有下面架构特点：</p>
 <ol>
-<li>平台运行时服务(Eureka，Zuul, Edda，Atlas)</li>
-<li>平台库和框架(Karyon/Ribbon，Hystrix，RxJava, Governator，Servo, Archaius, Astyanax)</li>
-<li>平台大数据和缓存服务(Cassandra/ES/Hadoop Platform as a Service, EVCache，S3)</li>
-<li>平台工具和服务(Asgard/Aminator， SimianArmy/ChaosMonkey, ICE)</li>
+<li>整个边界API层(BFF)住在一个PaaS平台里头，称为Edge PaaS。</li>
+<li>Edge PaaS本质上是一个动态脚本平台(Dyanmic Scripting Platform)，支持使用Groovy等JVM脚本语言，方便前端团队快速聚合裁剪后端微服务，并向前端设备暴露友好的API。之所以使用动态脚本语言Groovy，主要是考虑脚本语言对前端开发的友好性和生产率。</li>
+<li>Edge PaaS里头同时预置后端微服务的Java客户端SDK，方便Groovy脚本调用后端服务，同时对客户端进行Hystrix埋点，保障对后台微服务调用的稳定性。</li>
+<li>由于前端需求变更比较频繁，所以Edge PaaS里头的脚本一般更新也比较频繁，前端团队可以按需每日更新，上传动态脚本即可。</li>
+<li>如果后端微服务有升级更新，一般需要升级Edge PaaS里头的客户端SDK，但是这个不是频繁操作，一般以固定周期（比如两周一个full release）发生，但是集成回归测试成本还是比较高的。</li>
 </ol>
-<p><img src="/images/20180523/netflix_cloud_stack.png" alt="netflix cloud stack"></p>
-<p><img src="/images/20180523/deployment_arch.png" alt="deployment arch"></p>
-<p>业内最近开始提出云原生(Cloud Native)架构的理念，Pivotal是这个理念的主要推动者（背后主要是要推它的Cloud Foundry产品）。其实Netflix在2013年就提出了Cloud Native理念，而且它的整个平台(AWS IAAS + PaaS)就是云原生的。</p>
-<h3 id="五、两地三中心高可用"><a href="#五、两地三中心高可用" class="headerlink" title="五、两地三中心高可用"></a>五、两地三中心高可用</h3><p>Netflix的高可用架构也是做得大气磅礴，同城部署3个对等的可用区(AWS Availability Zone)，1个甚至2个挂不影响可用性。</p>
-<p><img src="/images/20180523/zone.png" alt="zone"></p>
-<p>异地(Regions)再做对等部署，一个Region里头的AZ全挂，另外一个Region接着可用。</p>
-<p><img src="/images/20180523/region.png" alt="region"></p>
-<h3 id="六、采用Cassandra-NoSql作为主数据库"><a href="#六、采用Cassandra-NoSql作为主数据库" class="headerlink" title="六、采用Cassandra NoSql作为主数据库"></a>六、采用Cassandra NoSql作为主数据库</h3><p>Netflix原来用Oracle等传统Sql数据库，但是受到扩展性挑战。公司架构管理层大胆颠覆性提出使用Cassandra Nosql作为主要的持久化化存储机制，Netflix在2012年就做到大部分数据存放Cassandra和S3等非关系数据库上。这个架构决策也是非常大胆有魄力，一般没有几个公司敢这么干的。Cassandra本质上是一种KV数据库，更像sorted map存储，不支持事务，不支持join。在CAP理论中，Cassandra是展现AP特性，无中心分散式高可用，天然支持跨数据中心数据同步，这大概是Netflix最看重的特性。Cassandra是读慢写快的特性（一般数据库是读快写慢）,Netflix大量使用Memcached做缓存补偿。</p>
-<p><img src="/images/20180523/cassandra.png" alt="cassandra"></p>
-<p>Cassandra在同城多个Zone之间同步数据，在异地(Inter-Region)之间再同步，流量到9Gbits/s，延迟83ms，18TB的数据备份(2013年的数据)。</p>
-<h3 id="七、镜像部署和发布自动刹车"><a href="#七、镜像部署和发布自动刹车" class="headerlink" title="七、镜像部署和发布自动刹车"></a>七、镜像部署和发布自动刹车</h3><p>近年docker容器技术大火，大家都在谈不可变基础设施(immutable infrastructure)的理念，本质就是镜像部署。Netflix在2012年前就已经实现镜像部署，发布的单位是AMI(Amazon Machine Image)镜像，通过持续交付工具Asgard（现在升级版叫Spinnaker）直接将镜像推到AWS云中部署，支持蓝绿（需要至少两倍虚机），灰度和金丝雀等部署模式。</p>
-<p><img src="/images/20180523/paved_road.png" alt="paved road"></p>
-<p>Netflix的发布管道叫Paved Road，就是平台团队铺好的路，由提交，构建，AMI镜像烘焙(Image Baking)和发布四个阶段组成。</p>
-<p>金丝雀发布之后，系统会自动生成金丝雀健康报告和分数（背后需要统计上千个metrics + 复杂智能算法），达到一定的分数(比如80分)，才能继续roll out。这个也称发布自动刹车。</p>
-<p><img src="/images/20180523/canary_score.png" alt="canary score"></p>
-<p><img src="/images/20180523/canary_score2.png" alt="canary score 2"></p>
-<h3 id="八、反脆弱架构"><a href="#八、反脆弱架构" class="headerlink" title="八、反脆弱架构"></a>八、反脆弱架构</h3><p>Netflix大胆提出反脆弱架构的理念（架构师受到尼古拉斯·塔勒布《反脆弱》一书的启发，并将其应用到架构领域）：为了让你的系统更加健壮，不是将它们严格保护起来，而是主动随机性地的增加一些破坏性测试，逼迫研发人员做好高可用。</p>
-<p><img src="/images/20180523/chaos_monkey.jpg" alt="chaos monkey"></p>
-<p>Netflix从周一至周五，上午9点到下午3点，混乱猴子军团会随机杀生产实例，这个叫Chaos Monkey，还有增加延迟的Latency Monkey。</p>
-<p><img src="/images/20180523/more_monkey.png" alt="more monkey"></p>
-<p>还有Chaos Gorilla可以杀整个可用区(Availability Zone)，Chaos Kong杀整个Region。据说Netflix曾主动关闭一个可用区，客户没有任何影响。</p>
-<p>国内一些互联网公司也有演习和自攻一说，但基本都是提前打招呼的，规模一般也不大，Netflix是随机不打招呼玩真的。</p>
-<h3 id="九、几乎没有流程，没有员工手册"><a href="#九、几乎没有流程，没有员工手册" class="headerlink" title="九、几乎没有流程，没有员工手册"></a>九、几乎没有流程，没有员工手册</h3><p>Netflix是一家高度重视人才密度，重自由和责任文化，轻流程的公司。公司没有正式的员工手册，只有一条简单的指导原则：</p>
-<p>Act in Netflix’s best interest，以Netflix的最佳利益行事。</p>
-<p><img src="/images/20180523/culture.png" alt="culture"></p>
-<h3 id="十、No-CTO-No-Ops"><a href="#十、No-CTO-No-Ops" class="headerlink" title="十、No CTO, No Ops"></a>十、No CTO, No Ops</h3><p>Netflix的技术这么牛逼，但它是没有技术CTO职位的，只有首席产品CPO，工程团队和产品团队的VP都向CPO汇报。这样做更多是为了产品导向，便于技术和产品沟通合作，避免两边扯，避免业务驱动还是技术驱动的悖论，大家都是产品驱动。Netflix把它称为BusDevOps组织架构。</p>
-<p><img src="/images/20180523/org_arch.jpg" alt="organization architecture"></p>
-<p>Netflix也没有独立的运维团队(NoOps)，架构+中间件+运维+大数据闭环统称为云平台工程(Cloud and Platform Engineering)团队，一个VP总负责，更好地对接DevOps文化。Netflix的产品导向文化非常浓厚，连平台工程团队开源出来的产品都是整整齐齐的(见<a href="https://netflix.github.io/)，PaaS云平台是整个云平台工程团队最大的产品输出。" target="_blank" rel="noopener">https://netflix.github.io/)，PaaS云平台是整个云平台工程团队最大的产品输出。</a></p>
-<p><img src="/images/20180523/tech_org.png" alt="technical organization"></p>
-<p>Netflix的CTO其实是Chief Talent Officer，负责人才招聘的，公司对人才的重视可见一斑。</p>
-<p><img src="/images/20180523/cto.png" alt="cto"></p>
-<h3 id="十一、无论公司兴衰，始终支付市场最高工资"><a href="#十一、无论公司兴衰，始终支付市场最高工资" class="headerlink" title="十一、无论公司兴衰，始终支付市场最高工资"></a>十一、无论公司兴衰，始终支付市场最高工资</h3><p>不用多解释，这大概是Netflix最有霸气底气和牛逼的一点。据我在米国的同学讲，去Netflix基本是硅谷顶薪，博士毕业去给开了超过30万美金的年薪（这还是前几年的行情）。一般进去难，去了留下来也不容易，不胜任的被客客气气劝退的有。能留下来的一般也不跳，因为再跳也没有更高的待遇了。</p>
-<p><img src="/images/20180523/top_pay.png" alt="top pay"></p>
-<p>显然，没有顶级的人才密度，就无法支撑其高大上的技术架构和鹤立鸡群的文化。顶级的人才聚集在一起，容易碰撞迸发创新火花，捣腾出颠覆性的东西和理念。</p>
-<h3 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h3><p>我在这边总结Netflix技术做的牛逼的事情，一方面是因为钦佩，但这不是重点，毕竟目前国内基础环境和人才密度是支撑不起这种类型文化的公司；但是，他山之石，可以攻玉，Netflix的很多技术、架构、组织和文化思路值得我们学习和借鉴。</p>
-<p>我本人没有在Netflix工作过，上面的信息主要通过互联网共享资料(特别是slideshare)学习解读(有些解读可能还是偏颇的)，所谓强者无秘密，Netflix的强大也体现在它无私分享精神，它在公司内部是信息公开透明分享的，对外部也一样，几乎所有Netflix微服务技术栈(也称NetflixOSS)你可以从github.com/netflix免费获得，其内部架构和技术相关资料基本上都可以通过slideshare或者Netflix techblog免费获得。在公开透明一块即使Google、Amazon和Apple这些互联网巨头都应该是自叹不如的。Netflix公司大概是地球上开出的一朵特别奇葩耀眼的花。</p>
-<p>向Netflix致敬!</p>
+<p>关于Netflix动态脚本平台的更多技术细节，可以参考其官方博客[附录4]。</p>
+<h3 id="Netflix微服务分层架构-2018"><a href="#Netflix微服务分层架构-2018" class="headerlink" title="Netflix微服务分层架构(2018)"></a>Netflix微服务分层架构(2018)</h3><p>上述的Edge PaaS其实是一个单块架构，随着Netflix的前端业务变得更加复杂，Edge PaaS也逐渐遭遇康威法则的约束，暴露出如下问题：</p>
+<ol>
+<li>Edge PaaS里头同时耦合了前端聚合裁剪适配和后端API/SDK逻辑，当后端API有升级，一般需要升级Edge PaaS里头的客户端SDK，这种升级可能因不兼容和测试不充分，造成前端业务代码出问题。总体上前后端团队因升级、集成测试而造成的沟通协调成本非常大。</li>
+<li>所有面向用户体验的脚本逻辑都住在一套Edge PaaS里头，缺乏隔离性，当某个团队的脚本有bug，很容易负面影响到其它脚本。整个Edge PaaS也是一个大单点(Single Point of Failure)，严重脚本缺陷或者流量洪峰可致集群宕机。</li>
+<li>前端脚本有上传快和动态加载等优势，但是本地调试不方便，很多依赖的环境(Edge PaaS + API/SDK)难以在本地开发环境复制，造成开发反馈效率低下，出现问题排障困难。</li>
+</ol>
+<p>为解决上述问题，Netflix边界工程团队对Edge PaaS的架构进行了调整，从单块一分为二，新的架构如下图所示：<br><img src="/images/2018062801/arch_2018_new.png" alt="arch 2018 new"><br>图片来自附录3</p>
+<p>主要变化是将边界API层分成两个子层次：</p>
+<ol>
+<li><strong>API聚合层</strong>，专注对后端微服务进行聚合，提供前端友好、抽象统一的API。API聚合层主要基于Java+后台服务的客户端SDK实现。API聚合层还按业务功能进行分集群部署(API Sharding)。</li>
+<li><strong>设备适配层BFF</strong>，专注对API聚合层的服务进行裁剪和适配，提供给不同的用户体验展示。</li>
+</ol>
+<p>设备聚合层采用对前端开发友好的Node.js框架，各个团队的服务可以独立部署在容器环境(Netflix的容器云Titus)中，使用容器机制进行隔离，避免相互干扰。Node.js+容器在Netflix称为NodeQuark平台。NodeQuark环境在开发人员本地可以搭建，方便开发本地调试。</p>
+<p>经过拆分，当前Netflix演化出一个五层的微服务分层架构，前面三层(用户体验、网关路由和设备适配层)专注解决前端开发人员生产率的问题；后端两层(API聚合层和微服务层)专注解决领域抽象和运维监控稳定性问题。整个体系架构层次职责分明，初步解决了之前单块Edge PaaS的诸多问题，解放了生产率。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><ol>
+<li>Netflix采用经典的微服务分层架构，前端体验-&gt;网关路由-&gt;边界API层(BFF)-&gt;后端微服务。这个分层架构可供一线企业实践微服务参考。</li>
+<li>近年，为了进一步提升前端研发效率，Netflix又将边界API层(BFF)拆分成两个子层次，设备适配层BFF和API聚合层。总体演化出一个五层的微服务分层架构。增加新的层次对于Netflix这种体谅的公司来说，有其架构合理性，但一般企业没必要细分5层，采用上述经典4层架构就OK了。</li>
+<li>从Netflix架构体系演变我们可以看出，为了提升研发效率，它的架构经过多层细分，这种分层会带来一定的性能损失。但是对于前沿大体量的互联网公司，性能一般并不是其架构的首要考量，灵活性、可治理性和研发效率才是它们的首要考量。性能的损失一般可以通过云计算+水平扩展+缓存等手段来弥补。</li>
+<li>波波近期和极客时间合作，推出《微服务架构实践160讲》的视频课程，其中第三个模块(预计6月份推出)，会对Netflix的微服务网关Zuul的升级版Zuul2进行深度剖析，欢迎大家关注。</li>
+</ol>
+<h3 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h3><ol>
+<li><p><a href="https://www.slideshare.net/danieljacobson/netflix-edge-engineering-open-house-presentations-june-9-2016" target="_blank" rel="noopener">Netflix Edge Engineering Open House</a></p>
+</li>
+<li><p><a href="https://www.slideshare.net/KatharinaProbst/the-new-netflix-api" target="_blank" rel="noopener">The New Netflix API</a></p>
+</li>
+<li><p><a href="https://www.slideshare.net/kcasella/edge-engineering-women-in-tech-dinner-20180322" target="_blank" rel="noopener">Edge Engineering Women in Tech Dinner</a></p>
+</li>
+<li><p><a href="https://medium.com/netflix-techblog/the-netflix-dynamic-scripting-platform-78c1b18b2a74" target="_blank" rel="noopener">The Netflix Dynamic Scripting Platform</a></p>
+</li>
+</ol>
 
         
         </div>
@@ -390,19 +380,19 @@ window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMin
         
 <nav id="article-nav">
     
-        <a href="/2018/05/24/20180524/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2018/06/28/2018062802/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
-                    成长型组织如何突破技术困局
+                    微服务架构~SoundCloud的微服务是如何分层的
                 
             </div>
         </a>
     
     
-        <a href="/2018/05/21/20180521/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2018/06/07/2018060702/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">架构师必须知道的架构设计原则</div>
+            <div class="article-nav-title">微服务架构~BFF和网关是如何演化出来的</div>
         </a>
     
 </nav>
